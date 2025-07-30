@@ -33,46 +33,108 @@ export default function HeroSection() {
         />
       </div>
       
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <motion.h1 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-6xl md:text-8xl font-black mb-6"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-            data-testid="hero-title"
-          >
-            <span className="bg-gradient-primary bg-clip-text text-transparent">Yagnesh</span>
-            <br />
-            <span className="text-white">Vora</span>
-          </motion.h1>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection("#portfolio")}
-              className="w-full sm:w-auto bg-gradient-primary hover:shadow-2xl px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base"
-              data-testid="button-view-work"
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-left">
+              <motion.h1 
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-5xl md:text-7xl font-black mb-6"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+                data-testid="hero-title"
+              >
+                <span className="bg-gradient-primary bg-clip-text text-transparent">Yagnesh</span>
+                <br />
+                <span className="text-white">Vora</span>
+              </motion.h1>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="mb-8"
+              >
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-4" data-testid="hero-intro">
+                  Hi, I am Yagnesh. A multimedia specialist with a masters degree in Interaction Design. 
+                  With a recent internship as a UX Designer, I have extensive experience in CX Research, 
+                  advertising, customer service and in the retail industry.
+                </p>
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed" data-testid="hero-description">
+                  I bring warmth and embrace diversity in a team, respecting all opinions and connecting with everyone 
+                  openly. I consistently refine my communication skills to match my creativity and enjoy exploring new ideas 
+                  with peers. Adaptable and flexible, I adjust to any opportunities in a changing world.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6"
+              >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection("#portfolio")}
+                  className="w-full sm:w-auto bg-gradient-primary hover:shadow-2xl px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base"
+                  data-testid="button-view-work"
+                >
+                  View My Work
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => scrollToSection("#contact")}
+                  className="w-full sm:w-auto glass-morphism hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base"
+                  data-testid="button-get-in-touch"
+                >
+                  Get In Touch
+                </motion.button>
+              </motion.div>
+            </div>
+            
+            {/* Right Content - Photo */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="relative flex justify-center lg:justify-end"
             >
-              View My Work
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection("#contact")}
-              className="w-full sm:w-auto glass-morphism hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base"
-              data-testid="button-get-in-touch"
-            >
-              Get In Touch
-            </motion.button>
-          </motion.div>
+              <div className="relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600" 
+                  alt="Yagnesh Vora - Professional Portrait" 
+                  className="w-80 h-80 lg:w-96 lg:h-96 object-cover rounded-2xl shadow-2xl"
+                  data-testid="hero-portrait"
+                />
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="absolute -bottom-6 -left-6 glass-morphism p-4 rounded-xl"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-coral">5+</div>
+                    <div className="text-sm text-gray-300">Years Experience</div>
+                  </div>
+                </motion.div>
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 1 }}
+                  className="absolute -top-6 -right-6 glass-morphism p-4 rounded-xl"
+                >
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-coral">MS</div>
+                    <div className="text-sm text-gray-300">Interaction Design</div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
       
