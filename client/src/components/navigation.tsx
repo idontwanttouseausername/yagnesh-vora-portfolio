@@ -41,7 +41,7 @@ export default function Navigation() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6 lg:space-x-8">
             {navItems.map((item, index) => (
               <motion.button
                 key={item.href}
@@ -49,7 +49,7 @@ export default function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
                 onClick={() => scrollToSection(item.href)}
-                className="hover:text-coral transition-colors duration-300"
+                className="px-2 py-1 hover:text-coral transition-colors duration-300 text-sm lg:text-base"
                 data-testid={`nav-link-${item.label.toLowerCase()}`}
               >
                 {item.label}
@@ -83,7 +83,7 @@ export default function Navigation() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-left hover:text-coral transition-colors duration-300"
+                    className="block w-full text-left py-2 hover:text-coral transition-colors duration-300 text-base"
                     data-testid={`mobile-nav-link-${item.label.toLowerCase()}`}
                   >
                     {item.label}

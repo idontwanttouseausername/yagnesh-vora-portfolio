@@ -48,27 +48,17 @@ export default function HeroSection() {
             <span className="text-white">Vora</span>
           </motion.h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8 font-light"
-            data-testid="hero-subtitle"
-          >
-            Multimedia Designer • UX Designer • Photographer • Videographer
-          </motion.p>
-          
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("#portfolio")}
-              className="bg-gradient-primary hover:shadow-2xl px-8 py-4 rounded-full font-semibold transition-all duration-300"
+              className="w-full sm:w-auto bg-gradient-primary hover:shadow-2xl px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base"
               data-testid="button-view-work"
             >
               View My Work
@@ -77,7 +67,7 @@ export default function HeroSection() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToSection("#contact")}
-              className="glass-morphism hover:bg-white/20 px-8 py-4 rounded-full font-semibold transition-all duration-300"
+              className="w-full sm:w-auto glass-morphism hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base"
               data-testid="button-get-in-touch"
             >
               Get In Touch

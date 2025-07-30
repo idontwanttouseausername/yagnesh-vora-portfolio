@@ -57,7 +57,7 @@ export default function PortfolioSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
+            className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 px-4"
           >
             {filterButtons.map((button) => (
               <motion.button
@@ -65,7 +65,7 @@ export default function PortfolioSection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveFilter(button.key)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm lg:text-base ${
                   activeFilter === button.key
                     ? "bg-gradient-primary"
                     : "glass-morphism hover:bg-white/20"
@@ -114,12 +114,12 @@ export default function PortfolioSection() {
               initial={{ opacity: 0 }}
               animate={isVisible ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-center mt-12"
+              className="text-center mt-12 px-4"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="glass-morphism hover:bg-white/20 px-8 py-4 rounded-full font-semibold transition-all duration-300"
+                className="glass-morphism hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base w-full sm:w-auto max-w-xs sm:max-w-none"
                 data-testid="button-load-more"
               >
                 Load More Projects
