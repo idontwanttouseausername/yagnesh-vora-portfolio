@@ -101,38 +101,14 @@ export default function HeroSection() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, delay: 0.4 }}
-              className="relative flex justify-center lg:justify-end"
+              className="flex justify-center lg:justify-end"
             >
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=600" 
-                  alt="Yagnesh Vora - Professional Portrait" 
-                  className="w-80 h-80 lg:w-96 lg:h-96 object-cover rounded-2xl shadow-2xl"
-                  data-testid="hero-portrait"
-                />
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="absolute -bottom-6 -left-6 glass-morphism p-4 rounded-xl"
-                >
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-coral">5+</div>
-                    <div className="text-sm text-gray-300">Years Experience</div>
-                  </div>
-                </motion.div>
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 1 }}
-                  className="absolute -top-6 -right-6 glass-morphism p-4 rounded-xl"
-                >
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-coral">MS</div>
-                    <div className="text-sm text-gray-300">Interaction Design</div>
-                  </div>
-                </motion.div>
-              </div>
+              <img 
+                src="/attached_assets/IMG_7905_1753863479593.JPG" 
+                alt="Yagnesh Vora - Professional Portrait" 
+                className="w-64 h-64 lg:w-72 lg:h-72 object-cover rounded-2xl shadow-2xl"
+                data-testid="hero-portrait"
+              />
             </motion.div>
           </div>
         </div>
