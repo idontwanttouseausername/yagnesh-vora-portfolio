@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-import IMG_7905 from "@assets/IMG_7905.JPG";
-
 export default function HeroSection() {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -104,7 +102,7 @@ export default function HeroSection() {
               className="flex justify-center lg:justify-end"
             >
               <img 
-                src={IMG_7905} 
+                src="/IMG_7905.JPG" 
                 alt="Yagnesh Vora - Professional Portrait" 
                 className="w-64 h-64 lg:w-72 lg:h-72 object-cover rounded-2xl shadow-2xl"
                 data-testid="hero-portrait"
