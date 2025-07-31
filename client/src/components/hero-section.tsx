@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
+import IMG_7905 from "@assets/IMG_7905.JPG";
+
 export default function HeroSection() {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -13,7 +15,6 @@ export default function HeroSection() {
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-dark"></div>
-      
       {/* Floating Elements */}
       <div className="absolute inset-0">
         <motion.div 
@@ -32,7 +33,6 @@ export default function HeroSection() {
           className="absolute top-1/2 left-1/4 w-16 h-16 bg-coral opacity-20 rounded-full"
         />
       </div>
-      
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -104,7 +104,7 @@ export default function HeroSection() {
               className="flex justify-center lg:justify-end"
             >
               <img 
-                src="/attached_assets/IMG_7905_1753863479593.JPG" 
+                src={IMG_7905} 
                 alt="Yagnesh Vora - Professional Portrait" 
                 className="w-64 h-64 lg:w-72 lg:h-72 object-cover rounded-2xl shadow-2xl"
                 data-testid="hero-portrait"
@@ -113,7 +113,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-      
       {/* Scroll Indicator */}
       <motion.div 
         animate={{ y: [0, 10, 0] }}
