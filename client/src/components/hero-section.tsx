@@ -55,11 +55,7 @@ export default function HeroSection() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="mb-8"
               >
-                <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-4" data-testid="hero-intro">
-                  Hi, I am Yagnesh. A multimedia specialist with a masters degree in Interaction Design. 
-                  With a recent internship as a UX Designer, I have extensive experience in CX Research, 
-                  advertising, customer service and in the retail industry.
-                </p>
+                <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-4" data-testid="hero-intro">Hi, I am Yagnesh. A multimedia specialist with a masters degree in Interaction Design. With a recent internship as a UX Designer, I have extensive experience in CX Research, photography, content creation, customer service and in the retail industry.</p>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed" data-testid="hero-description">
                   I bring warmth and embrace diversity in a team, respecting all opinions and connecting with everyone 
                   openly. I consistently refine my communication skills to match my creativity and enjoy exploring new ideas 
