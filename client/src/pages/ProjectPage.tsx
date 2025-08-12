@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
 import { ArrowLeft, ExternalLink, Calendar, User, Wrench, Figma, Trello, Video, Scissors, Layout } from "lucide-react";
@@ -5,11 +6,14 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import ImageModal from "@/components/ImageModal";
 import type { Project } from "@shared/schema";
 
 export default function ProjectPage() {
   const [, params] = useRoute("/project/:id");
   const projectId = params?.id;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Function to get technology icon
   const getTechIcon = (tech: string) => {
@@ -185,6 +189,10 @@ export default function ProjectPage() {
                         transition={{ duration: 0.5, delay: index * 0.1 }}
                         className="relative group cursor-pointer"
                         data-testid={`image-gallery-${index}`}
+                        onClick={() => {
+                          setCurrentImageIndex(index);
+                          setModalOpen(true);
+                        }}
                       >
                         <img
                           src={image}
@@ -195,7 +203,9 @@ export default function ProjectPage() {
                             target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="text-white text-sm font-medium">Click to view details</div>
+                        </div>
                       </motion.div>
                     ))}
                   </div>
@@ -259,6 +269,18 @@ export default function ProjectPage() {
             </Link>
           </div>
         </motion.div>
+
+        {/* Image Modal */}
+        {project.projectImages && (
+          <ImageModal
+            images={project.projectImages}
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            currentIndex={currentImageIndex}
+            onNavigate={setCurrentImageIndex}
+            projectTitle={project.title}
+          />
+        )}
       </div>
     </div>
   );
