@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 import { type Project } from "@shared/schema";
 
 interface PortfolioCardProps {
@@ -18,12 +19,13 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
   };
 
   return (
-    <motion.div
-      whileHover={{ y: -10, scale: 1.02 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="project-card glass-morphism rounded-2xl overflow-hidden group cursor-pointer"
-      data-testid={`project-card-${project.id}`}
-    >
+    <Link href={`/project/${project.id}`} data-testid={`link-project-${project.id}`}>
+      <motion.div
+        whileHover={{ y: -10, scale: 1.02 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="project-card glass-morphism rounded-2xl overflow-hidden group cursor-pointer"
+        data-testid={`project-card-${project.id}`}
+      >
       <div className="relative overflow-hidden">
         <motion.img 
           src={project.imageUrl} 
@@ -77,5 +79,6 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
         </div>
       </div>
     </motion.div>
+    </Link>
   );
 }

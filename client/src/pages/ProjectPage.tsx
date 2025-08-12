@@ -1,0 +1,253 @@
+import { useQuery } from "@tanstack/react-query";
+import { useRoute } from "wouter";
+import { ArrowLeft, ExternalLink, Calendar, User, Wrench } from "lucide-react";
+import { Link } from "wouter";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import type { Project } from "@shared/schema";
+
+export default function ProjectPage() {
+  const [, params] = useRoute("/project/:id");
+  const projectId = params?.id;
+
+  const { data: project, isLoading, error } = useQuery<Project>({
+    queryKey: ["/api/projects", projectId],
+    enabled: !!projectId,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+        <div className="container mx-auto px-6 py-20">
+          <div className="animate-pulse">
+            <div className="h-8 bg-slate-700 rounded w-1/4 mb-6"></div>
+            <div className="h-16 bg-slate-700 rounded w-3/4 mb-8"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="h-96 bg-slate-700 rounded"></div>
+              <div className="space-y-4">
+                <div className="h-4 bg-slate-700 rounded w-3/4"></div>
+                <div className="h-4 bg-slate-700 rounded w-1/2"></div>
+                <div className="h-4 bg-slate-700 rounded w-5/6"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !project) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-white mb-4">Project Not Found</h1>
+          <p className="text-slate-300 mb-8">The project you're looking for doesn't exist.</p>
+          <Link href="/">
+            <Button data-testid="button-home">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
+        <div className="container mx-auto px-4 md:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" data-testid="link-home">
+              <Button variant="ghost" className="text-white hover:text-coral-400 p-2 md:px-4 md:py-2">
+                <ArrowLeft className="w-4 h-4 md:mr-2" />
+                <span className="hidden md:inline">Back to Portfolio</span>
+              </Button>
+            </Link>
+            <h2 className="text-lg md:text-xl font-bold text-white truncate ml-4">{project.title}</h2>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 md:px-6 pt-24 md:pt-32 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Hero Section */}
+          <div className="text-center mb-12 md:mb-16">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6" data-testid="text-project-title">
+              {project.title}
+            </h1>
+            <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-6 md:mb-8 px-4" data-testid="text-project-description">
+              {project.detailedDescription || project.description}
+            </p>
+            <div className="flex flex-wrap gap-2 justify-center mb-8">
+              {project.tags?.map((tag) => (
+                <Badge 
+                  key={tag} 
+                  variant="secondary" 
+                  className="bg-slate-700/50 text-slate-300 hover:bg-slate-600/50"
+                  data-testid={`badge-tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mb-12 md:mb-16">
+            {/* Project Details */}
+            <div className="lg:col-span-1">
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-4 md:p-6 lg:sticky lg:top-24">
+                <h3 className="text-xl font-bold text-white mb-6">Project Details</h3>
+                
+                {project.duration && (
+                  <div className="flex items-center gap-3 mb-4" data-testid="project-duration">
+                    <Calendar className="w-5 h-5 text-coral-400" />
+                    <div>
+                      <p className="text-sm text-slate-400">Duration</p>
+                      <p className="text-white">{project.duration}</p>
+                    </div>
+                  </div>
+                )}
+
+                {project.role && (
+                  <div className="flex items-center gap-3 mb-4" data-testid="project-role">
+                    <User className="w-5 h-5 text-coral-400" />
+                    <div>
+                      <p className="text-sm text-slate-400">Role</p>
+                      <p className="text-white">{project.role}</p>
+                    </div>
+                  </div>
+                )}
+
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="flex items-start gap-3 mb-4" data-testid="project-technologies">
+                    <Wrench className="w-5 h-5 text-coral-400 mt-1" />
+                    <div>
+                      <p className="text-sm text-slate-400 mb-2">Technologies</p>
+                      <div className="flex flex-wrap gap-1">
+                        {project.technologies.map((tech) => (
+                          <Badge 
+                            key={tech}
+                            variant="outline" 
+                            className="text-xs border-slate-600 text-slate-300"
+                            data-testid={`badge-tech-${tech.toLowerCase().replace(/\s+/g, '-')}`}
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {project.projectUrl && (
+                  <Button asChild className="w-full mt-6" data-testid="button-project-link">
+                    <a href={project.projectUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View Live Project
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            {/* Content Area */}
+            <div className="lg:col-span-2">
+              {/* Image Gallery */}
+              {project.projectImages && project.projectImages.length > 0 && (
+                <div className="mb-8 md:mb-12" data-testid="project-gallery">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Project Gallery</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    {project.projectImages.map((image, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="relative group cursor-pointer"
+                        data-testid={`image-gallery-${index}`}
+                      >
+                        <img
+                          src={image}
+                          alt={`${project.title} screenshot ${index + 1}`}
+                          className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Project Sections */}
+              <div className="space-y-8 md:space-y-12">
+                {project.challenges && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    data-testid="project-challenges"
+                  >
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Challenges</h3>
+                    <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
+                      <p className="text-slate-300 leading-relaxed">{project.challenges}</p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {project.solutions && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    data-testid="project-solutions"
+                  >
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Solutions</h3>
+                    <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
+                      <p className="text-slate-300 leading-relaxed">{project.solutions}</p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {project.outcomes && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    data-testid="project-outcomes"
+                  >
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Outcomes & Impact</h3>
+                    <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
+                      <p className="text-slate-300 leading-relaxed">{project.outcomes}</p>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Back to Portfolio */}
+          <div className="text-center">
+            <Link href="/">
+              <Button size="lg" data-testid="button-back-portfolio">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Portfolio
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+}

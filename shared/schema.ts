@@ -12,6 +12,14 @@ export const projects = pgTable("projects", {
   projectUrl: text("project_url"),
   tags: text("tags").array(),
   featured: varchar("featured").default("false"),
+  detailedDescription: text("detailed_description"), // Long form description for project page
+  projectImages: text("project_images").array(), // Array of image URLs for the project gallery
+  challenges: text("challenges"), // Project challenges faced
+  solutions: text("solutions"), // Solutions implemented
+  outcomes: text("outcomes"), // Project results/outcomes
+  duration: text("duration"), // Project timeline
+  role: text("role"), // Role in the project
+  technologies: text("technologies").array(), // Technologies used
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -32,6 +40,14 @@ export const insertProjectSchema = createInsertSchema(projects).pick({
   projectUrl: true,
   tags: true,
   featured: true,
+  detailedDescription: true,
+  projectImages: true,
+  challenges: true,
+  solutions: true,
+  outcomes: true,
+  duration: true,
+  role: true,
+  technologies: true,
 });
 
 export const insertMessageSchema = createInsertSchema(messages).pick({
