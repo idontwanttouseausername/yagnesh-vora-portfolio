@@ -89,7 +89,7 @@ export default function ImageModal({
           data-testid="image-modal"
         >
           <div 
-            className="relative w-full h-full max-w-6xl max-h-[90vh] mx-4"
+            className="relative w-full h-full max-w-6xl max-h-[90vh] mx-4 group"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -103,13 +103,13 @@ export default function ImageModal({
               <X className="w-5 h-5" />
             </Button>
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons - Only visible on hover */}
             {images.length > 1 && (
               <>
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   onClick={handlePrevious}
                   data-testid="button-previous"
                 >
@@ -119,7 +119,7 @@ export default function ImageModal({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   onClick={handleNext}
                   data-testid="button-next"
                 >
@@ -128,12 +128,17 @@ export default function ImageModal({
               </>
             )}
 
-            {/* Image Counter */}
-            {images.length > 1 && (
-              <div className="absolute top-4 left-4 z-10 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                {currentIndex + 1} / {images.length}
-              </div>
-            )}
+            {/* Image Title - Top Center */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-black/70 text-white px-4 py-2 rounded-lg text-center">
+              <h3 className="text-lg font-bold">
+                {currentDescription.title}
+              </h3>
+              {images.length > 1 && (
+                <p className="text-xs text-slate-300 mt-1">
+                  {currentIndex + 1} / {images.length}
+                </p>
+              )}
+            </div>
 
             {/* Description Toggle */}
             <Button
@@ -177,9 +182,6 @@ export default function ImageModal({
                   data-testid="image-description"
                 >
                   <div className="max-w-4xl mx-auto">
-                    <h3 className="text-xl font-bold text-white mb-2">
-                      {currentDescription.title}
-                    </h3>
                     <p className="text-slate-300 leading-relaxed">
                       {currentDescription.description}
                     </p>
@@ -188,19 +190,21 @@ export default function ImageModal({
               )}
             </AnimatePresence>
 
-            {/* Thumbnail Navigation */}
+            {/* Thumbnail Navigation - Only visible on hover */}
             {images.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/50 p-2 rounded-lg">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
-                    }`}
-                    onClick={() => onNavigate(index)}
-                    data-testid={`thumbnail-${index}`}
-                  />
-                ))}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex gap-2 bg-black/70 p-2 rounded-lg">
+                  {images.map((_, index) => (
+                    <button
+                      key={index}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        index === currentIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
+                      }`}
+                      onClick={() => onNavigate(index)}
+                      data-testid={`thumbnail-${index}`}
+                    />
+                  ))}
+                </div>
               </div>
             )}
           </div>
