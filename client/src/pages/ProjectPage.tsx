@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
-import { ArrowLeft, ExternalLink, Calendar, User, Wrench } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar, User, Wrench, Figma, Trello, Video, Scissors, Layout } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,17 @@ import type { Project } from "@shared/schema";
 export default function ProjectPage() {
   const [, params] = useRoute("/project/:id");
   const projectId = params?.id;
+
+  // Function to get technology icon
+  const getTechIcon = (tech: string) => {
+    const techLower = tech.toLowerCase();
+    if (techLower.includes('figma')) return <Figma className="w-4 h-4" />;
+    if (techLower.includes('trello')) return <Trello className="w-4 h-4" />;
+    if (techLower.includes('davinci') || techLower.includes('resolve')) return <Video className="w-4 h-4" />;
+    if (techLower.includes('capcut')) return <Scissors className="w-4 h-4" />;
+    if (techLower.includes('miro')) return <Layout className="w-4 h-4" />;
+    return <Wrench className="w-4 h-4" />; // Default icon
+  };
 
   const { data: project, isLoading, error } = useQuery<Project>({
     queryKey: ["/api/projects", projectId],
@@ -131,14 +142,15 @@ export default function ProjectPage() {
                     <Wrench className="w-5 h-5 text-coral-400 mt-1" />
                     <div>
                       <p className="text-sm text-slate-400 mb-2">Technologies</p>
-                      <div className="flex flex-wrap gap-1">
+                      <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech) => (
                           <Badge 
                             key={tech}
                             variant="outline" 
-                            className="text-xs border-slate-600 text-slate-300"
+                            className="text-xs border-slate-600 text-slate-300 flex items-center gap-1.5 px-2.5 py-1"
                             data-testid={`badge-tech-${tech.toLowerCase().replace(/\s+/g, '-')}`}
                           >
+                            {getTechIcon(tech)}
                             {tech}
                           </Badge>
                         ))}
