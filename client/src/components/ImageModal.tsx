@@ -44,11 +44,6 @@ const getImageDescription = (index: number): { title: string; description: strin
       title: "Settings & Personalization",
       description: "Customizable user preferences, notification settings, and personalized training plans.",
       workDone: ["Settings Interface", "Personalization Features", "User Preferences", "Notification Design"]
-    },
-    {
-      title: "Marketing Materials",
-      description: "Brand positioning and marketing assets for app store listings and promotional campaigns.",
-      workDone: ["Brand Design", "Marketing Strategy", "Asset Creation", "App Store Optimization"]
     }
   ];
 
