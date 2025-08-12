@@ -20,8 +20,8 @@ const getImageDescription = (index: number): { title: string; description: strin
       description: "Clear and intuitive home interface redesigned after completing usability tests that suggested to show coaches for the sport user has selected."
     },
     {
-      title: "Coach Profile & Booking",
-      description: "Comprehensive coach profiles with ratings, specializations, and seamless booking system."
+      title: "Coaching Requests and Chat",
+      description: "Easy to access requests for coach. This section has been divided into 3 categories according to the request type made by the athlete."
     },
     {
       title: "Training Session Interface",
