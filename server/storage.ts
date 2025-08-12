@@ -26,12 +26,12 @@ export class MemStorage implements IStorage {
   private seedProjects() {
     const sampleProjects: Omit<Project, "id">[] = [
       {
-        title: "E-commerce Mobile App",
-        description: "Complete UX/UI redesign for enhanced user experience",
+        title: "Skillry",
+        description: "An app based sports start-up offering coaching services in different sports",
         category: "ux",
         imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
         projectUrl: "",
-        tags: ["UX Design", "Mobile", "E-commerce"],
+        tags: ["UX Design", "Mobile", "Sports", "Startup"],
         featured: "true",
         createdAt: new Date(),
       },
