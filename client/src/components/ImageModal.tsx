@@ -17,7 +17,7 @@ const getImageDescription = (index: number): { title: string; description: strin
   const descriptions = [
     {
       title: "Home Screen & Navigation",
-      description: "Clear and intuitive home interface redesigned after completing usability tests that suggested to suggest Coaches for the sport user has selected."
+      description: "Clear and intuitive home interface redesigned after completing usability tests that suggested to show coaches for the sport user has selected."
     },
     {
       title: "Coach Profile & Booking",
