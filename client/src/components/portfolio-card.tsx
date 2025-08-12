@@ -28,7 +28,11 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
         <motion.img 
           src={project.imageUrl} 
           alt={project.title}
-          className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+          className={`w-full h-64 transition-transform duration-300 group-hover:scale-110 ${
+            project.title === 'Skillry' 
+              ? 'object-contain bg-gray-900 p-8' 
+              : 'object-cover'
+          }`}
           whileHover={{ scale: 1.1 }}
           data-testid={`project-image-${project.id}`}
         />

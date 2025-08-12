@@ -29,7 +29,7 @@ export class MemStorage implements IStorage {
         title: "Skillry",
         description: "An app based sports start-up offering coaching services in different sports",
         category: "ux",
-        imageUrl: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+        imageUrl: "/skillry-logo.png",
         projectUrl: "",
         tags: ["UX Design", "Mobile", "Sports", "Startup"],
         featured: "true",
