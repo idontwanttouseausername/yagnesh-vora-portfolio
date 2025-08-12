@@ -13,44 +13,37 @@ interface ImageModalProps {
 }
 
 // Image descriptions for Skillry project
-const getImageDescription = (index: number): { title: string; description: string; workDone: string[] } => {
+const getImageDescription = (index: number): { title: string; description: string } => {
   const descriptions = [
     {
       title: "Home Screen & Navigation",
-      description: "Clean and intuitive home interface showcasing different sports categories with easy navigation.",
-      workDone: ["UI/UX Design", "Information Architecture", "Visual Hierarchy", "Icon Design"]
+      description: "Clean and intuitive home interface showcasing different sports categories with easy navigation. Clear and intuitive home interface redesigned after completing usability tests that suggested to suggest Coaches for the sport user has selected."
     },
     {
       title: "Coach Profile & Booking",
-      description: "Comprehensive coach profiles with ratings, specializations, and seamless booking system.",
-      workDone: ["User Flow Design", "Profile Layout", "Booking Interface", "Rating System"]
+      description: "Comprehensive coach profiles with ratings, specializations, and seamless booking system."
     },
     {
       title: "Training Session Interface",
-      description: "Interactive training session with video analysis, real-time feedback, and progress tracking.",
-      workDone: ["Video UI Design", "Feedback System", "Progress Visualization", "Interactive Elements"]
+      description: "Interactive training session with video analysis, real-time feedback, and progress tracking."
     },
     {
       title: "Performance Analytics",
-      description: "Data-driven insights showing athlete progress with charts, metrics, and achievement tracking.",
-      workDone: ["Data Visualization", "Chart Design", "Metrics Dashboard", "Progress Tracking"]
+      description: "Data-driven insights showing athlete progress with charts, metrics, and achievement tracking."
     },
     {
       title: "Social Features",
-      description: "Community aspect allowing athletes to connect, share achievements, and motivate each other.",
-      workDone: ["Social UI Design", "Feed Layout", "Interaction Design", "Community Features"]
+      description: "Community aspect allowing athletes to connect, share achievements, and motivate each other."
     },
     {
       title: "Settings & Personalization",
-      description: "Customizable user preferences, notification settings, and personalized training plans.",
-      workDone: ["Settings Interface", "Personalization Features", "User Preferences", "Notification Design"]
+      description: "Customizable user preferences, notification settings, and personalized training plans."
     }
   ];
 
   return descriptions[index] || {
     title: `Screenshot ${index + 1}`,
-    description: "Project screenshot showcasing the user interface and design work.",
-    workDone: ["UI/UX Design", "Interface Development"]
+    description: "Project screenshot showcasing the user interface and design work."
   };
 };
 
@@ -187,23 +180,9 @@ export default function ImageModal({
                     <h3 className="text-xl font-bold text-white mb-2">
                       {currentDescription.title}
                     </h3>
-                    <p className="text-slate-300 mb-4 leading-relaxed">
+                    <p className="text-slate-300 leading-relaxed">
                       {currentDescription.description}
                     </p>
-                    <div>
-                      <p className="text-sm text-slate-400 mb-2">Work Completed:</p>
-                      <div className="flex flex-wrap gap-2">
-                        {currentDescription.workDone.map((work, index) => (
-                          <span
-                            key={index}
-                            className="text-xs bg-coral-500/20 text-coral-300 px-2 py-1 rounded-full"
-                            data-testid={`work-tag-${index}`}
-                          >
-                            {work}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
               )}
