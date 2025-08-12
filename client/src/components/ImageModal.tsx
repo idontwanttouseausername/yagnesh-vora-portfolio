@@ -25,7 +25,7 @@ const getImageDescription = (index: number): { title: string; description: strin
     },
     {
       title: "Training Session Interface",
-      description: "Interactive training session with video analysis, real-time feedback, and progress tracking."
+      description: "The chat section displays the requests made by the learner and access the rejected requests by the coach."
     },
     {
       title: "Performance Analytics",
