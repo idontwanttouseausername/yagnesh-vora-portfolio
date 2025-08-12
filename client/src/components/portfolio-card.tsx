@@ -30,7 +30,7 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
           alt={project.title}
           className={`w-full h-64 transition-transform duration-300 group-hover:scale-110 ${
             project.title === 'Skillry' 
-              ? 'object-contain bg-gray-900 p-8' 
+              ? 'object-cover bg-gray-900' 
               : 'object-cover'
           }`}
           whileHover={{ scale: 1.1 }}
