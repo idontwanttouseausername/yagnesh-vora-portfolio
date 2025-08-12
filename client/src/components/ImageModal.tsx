@@ -192,7 +192,7 @@ export default function ImageModal({
 
             {/* Thumbnail Navigation - Only visible on hover */}
             {images.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute bottom-16 left-1/2 -translate-x-1/2 opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="flex gap-2 bg-black/70 p-2 rounded-lg">
                   {images.map((_, index) => (
                     <button
