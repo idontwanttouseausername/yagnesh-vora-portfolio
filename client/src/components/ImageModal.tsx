@@ -24,7 +24,7 @@ const getImageDescription = (index: number): { title: string; description: strin
       description: "Easy to access requests for coach. This section has been divided into 3 categories according to the request type made by the athlete."
     },
     {
-      title: "Training Session Interface",
+      title: "Chat Interface for Learner",
       description: "The chat section displays the requests made by the learner and access the rejected requests by the coach."
     },
     {
