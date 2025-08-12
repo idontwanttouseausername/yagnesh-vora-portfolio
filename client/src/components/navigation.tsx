@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { href: "#home", label: "Home" },
@@ -22,7 +33,8 @@ export default function Navigation() {
   return (
     <motion.nav 
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      animate={{ y: isScrolled ? 0 : -100 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
       className="fixed top-0 w-full z-50 glass-morphism"
       data-testid="navigation"
     >
@@ -30,8 +42,8 @@ export default function Navigation() {
         <div className="flex justify-between items-center">
           <motion.div 
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            animate={{ opacity: isScrolled ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
             className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent"
             style={{ fontFamily: 'Inter, sans-serif' }}
             data-testid="logo"
@@ -44,9 +56,9 @@ export default function Navigation() {
             {navItems.map((item, index) => (
               <motion.button
                 key={item.href}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + index * 0.1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isScrolled ? 1 : 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
                 onClick={() => scrollToSection(item.href)}
                 className="px-2 py-1 hover:text-coral transition-colors duration-300 text-sm lg:text-base"
                 data-testid={`nav-link-${item.label.toLowerCase()}`}
@@ -57,13 +69,16 @@ export default function Navigation() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isScrolled ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
             className="md:hidden text-white focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             data-testid="mobile-menu-button"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          </motion.button>
         </div>
 
         {/* Mobile Menu */}
