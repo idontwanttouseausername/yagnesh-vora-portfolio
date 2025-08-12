@@ -128,9 +128,9 @@ export default function ImageModal({
               </>
             )}
 
-            {/* Image Title - Top Center */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 bg-black/70 text-white px-4 py-2 rounded-lg text-center">
-              <h3 className="text-lg font-bold">
+            {/* Image Title - Top Left */}
+            <div className="absolute top-4 left-4 z-10 bg-black/70 text-white px-4 py-2 rounded-lg max-w-xs">
+              <h3 className="text-lg font-bold leading-tight">
                 {currentDescription.title}
               </h3>
               {images.length > 1 && (
