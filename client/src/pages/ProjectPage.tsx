@@ -254,18 +254,39 @@ export default function ProjectPage() {
                           setModalOpen(true);
                         }}
                       >
-                        <img
-                          src={image}
-                          alt={`${project.title} screenshot ${index + 1}`}
-                          className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <div className="text-white text-sm font-medium">Click to view details</div>
-                        </div>
+                        {image.endsWith('.mov') || image.endsWith('.mp4') ? (
+                          <>
+                            <video
+                              src={image}
+                              className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
+                              muted
+                              preload="metadata"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <div className="text-white text-sm font-medium flex items-center gap-2">
+                                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M8 5v14l11-7z"/>
+                                </svg>
+                                Play Video
+                              </div>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              src={image}
+                              alt={`${project.title} screenshot ${index + 1}`}
+                              className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement;
+                                target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                              <div className="text-white text-sm font-medium">Click to view details</div>
+                            </div>
+                          </>
+                        )}
                       </motion.div>
                     ))}
                   </div>
