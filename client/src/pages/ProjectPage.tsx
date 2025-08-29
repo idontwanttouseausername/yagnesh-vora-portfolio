@@ -176,44 +176,8 @@ export default function ProjectPage() {
 
             {/* Content Area */}
             <div className="lg:col-span-2">
-              {/* Image Gallery */}
-              {project.projectImages && project.projectImages.length > 0 && (
-                <div className="mb-8 md:mb-12" data-testid="project-gallery">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Project Gallery</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    {project.projectImages.map((image, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="relative group cursor-pointer"
-                        data-testid={`image-gallery-${index}`}
-                        onClick={() => {
-                          setCurrentImageIndex(index);
-                          setModalOpen(true);
-                        }}
-                      >
-                        <img
-                          src={image}
-                          alt={`${project.title} screenshot ${index + 1}`}
-                          className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                          <div className="text-white text-sm font-medium">Click to view details</div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Project Sections */}
-              <div className="space-y-8 md:space-y-12">
+              {/* Project Sections - Now at the top */}
+              <div className="space-y-8 md:space-y-12 mb-12 md:mb-16">
                 {project.challenges && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -271,6 +235,42 @@ export default function ProjectPage() {
                   </motion.div>
                 )}
               </div>
+
+              {/* Image Gallery - Now at the bottom */}
+              {project.projectImages && project.projectImages.length > 0 && (
+                <div className="mb-8 md:mb-12" data-testid="project-gallery">
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Project Gallery</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    {project.projectImages.map((image, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="relative group cursor-pointer"
+                        data-testid={`image-gallery-${index}`}
+                        onClick={() => {
+                          setCurrentImageIndex(index);
+                          setModalOpen(true);
+                        }}
+                      >
+                        <img
+                          src={image}
+                          alt={`${project.title} screenshot ${index + 1}`}
+                          className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="text-white text-sm font-medium">Click to view details</div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
