@@ -274,15 +274,7 @@ export default function ProjectPage() {
             </div>
           </div>
 
-          {/* Back to Portfolio */}
-          <div className="text-center">
-            <Link href="/">
-              <Button size="lg" data-testid="button-back-portfolio">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Portfolio
-              </Button>
-            </Link>
-          </div>
+
         </motion.div>
 
         {/* Image Modal */}
