@@ -246,7 +246,7 @@ export default function ProjectPage() {
               {project.projectImages && project.projectImages.length > 0 && (
                 <div className="mb-8 md:mb-12" data-testid="project-gallery">
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Project Gallery</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  <div className="grid grid-cols-2 md:grid-cols-2 gap-3 md:gap-6">
                     {project.projectImages.map((image, index) => (
                       <motion.div
                         key={index}
@@ -264,7 +264,7 @@ export default function ProjectPage() {
                           <>
                             <video
                               src={image}
-                              className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
+                              className="w-full h-32 sm:h-40 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
                               muted
                               preload="metadata"
                             />
@@ -282,7 +282,7 @@ export default function ProjectPage() {
                             <img
                               src={image}
                               alt={`${project.title} screenshot ${index + 1}`}
-                              className="w-full h-48 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
+                              className="w-full h-32 sm:h-40 md:h-64 object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-105"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;

@@ -30,7 +30,7 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
         <motion.img 
           src={project.imageUrl} 
           alt={project.title}
-          className={`w-full h-64 transition-transform duration-300 group-hover:scale-110 ${
+          className={`w-full h-40 sm:h-48 md:h-64 transition-transform duration-300 group-hover:scale-110 ${
             project.title === 'Skillry' 
               ? 'object-cover bg-gray-900' 
               : project.title === 'Meet and Eat'
@@ -48,20 +48,20 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
       
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2" data-testid={`project-title-${project.id}`}>
+      <div className="p-3 sm:p-4 md:p-6">
+        <h3 className="text-sm sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2" data-testid={`project-title-${project.id}`}>
           {project.title}
         </h3>
-        <p className="text-gray-400 mb-4" data-testid={`project-description-${project.id}`}>
+        <p className="text-xs sm:text-sm md:text-base text-gray-400 mb-2 sm:mb-4 line-clamp-2" data-testid={`project-description-${project.id}`}>
           {project.description}
         </p>
         
         {project.tags && project.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.tags.map((tag, index) => (
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-4">
+            {project.tags.slice(0, 3).map((tag, index) => (
               <span 
                 key={index} 
-                className="text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300"
+                className="text-xs bg-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-gray-300"
                 data-testid={`project-tag-${project.id}-${index}`}
               >
                 {tag}
