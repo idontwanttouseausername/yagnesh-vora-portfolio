@@ -209,7 +209,9 @@ export default function ProjectPage() {
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Solutions</h3>
                     <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
                       <p className="text-slate-300 leading-relaxed">
-                        {project.title === 'Skillry' 
+                        {project.title === 'Meet and Eat'
+                          ? "Created Meet and Eat, an app that enables students to share and explore diverse cuisines while forming meaningful social connections."
+                          : project.title === 'Skillry' 
                           ? "Devised a seamless user flow using personas each for the athlete and the coach."
                           : project.solutions
                         }
