@@ -37,6 +37,11 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
           }`}
           whileHover={{ scale: 1.1 }}
           data-testid={`project-image-${project.id}`}
+          onError={(e) => {
+            console.error('Image failed to load:', project.imageUrl);
+            const target = e.target as HTMLImageElement;
+            target.src = 'https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600';
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>

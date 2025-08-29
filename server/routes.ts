@@ -8,7 +8,15 @@ import express from "express";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static files from attached_assets
-  app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets')));
+  app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets'), {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith('.jpeg') || filePath.endsWith('.jpg')) {
+        res.setHeader('Content-Type', 'image/jpeg');
+      } else if (filePath.endsWith('.png')) {
+        res.setHeader('Content-Type', 'image/png');
+      }
+    }
+  }));
 
   // Get all projects
   app.get("/api/projects", async (req, res) => {
