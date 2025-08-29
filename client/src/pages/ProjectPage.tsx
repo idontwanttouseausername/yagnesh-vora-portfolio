@@ -212,7 +212,7 @@ export default function ProjectPage() {
                         {project.title === 'Meet and Eat'
                           ? "Created Meet and Eat, an app that enables students to share and explore diverse cuisines while forming meaningful social connections."
                           : project.title === 'Skillry' 
-                          ? "Devised a seamless user flow using personas each for the athlete and the coach."
+                          ? "Devised a seamless user flow for each role based login (athletes and coaches)."
                           : project.solutions
                         }
                       </p>
