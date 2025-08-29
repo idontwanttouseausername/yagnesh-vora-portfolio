@@ -33,6 +33,8 @@ export default function PortfolioCard({ project }: PortfolioCardProps) {
           className={`w-full h-64 transition-transform duration-300 group-hover:scale-110 ${
             project.title === 'Skillry' 
               ? 'object-cover bg-gray-900' 
+              : project.title === 'Meet and Eat'
+              ? 'object-cover object-center'
               : 'object-cover'
           }`}
           whileHover={{ scale: 1.1 }}
