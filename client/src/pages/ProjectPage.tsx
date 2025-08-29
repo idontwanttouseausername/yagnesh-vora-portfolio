@@ -233,7 +233,7 @@ export default function ProjectPage() {
                         {project.title === 'Meet and Eat'
                           ? "Delivered a fully functional prototype in the Apple Foundation Program, showcasing the potential of food as a medium for inclusivity and cross-cultural engagement."
                           : project.title === 'Skillry' 
-                          ? "Successfully launched the version 0.6 of the app in Q3 of 2024 with an improved and seamless user experience for the users and the coaches end of the app."
+                          ? "Successfully launched the version 0.6 of the app in Q3 of 2024 with an improved and seamless user experience for role-based access control (RBAC)."
                           : project.outcomes
                         }
                       </p>
