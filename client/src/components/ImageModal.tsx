@@ -201,6 +201,7 @@ export default function ImageModal({
                   src={images[currentIndex]}
                   className="max-w-full max-h-full object-contain rounded-lg"
                   controls
+                  controlsList="nodownload"
                   data-testid={`modal-video-${currentIndex}`}
                 >
                   Your browser does not support the video tag.
