@@ -226,13 +226,17 @@ export default function ImageModal({
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 50 }}
-                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6 rounded-b-lg"
+                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6 rounded-b-lg cursor-pointer"
                   data-testid="image-description"
+                  onClick={() => setShowDescription(false)}
                 >
                   <div className="max-w-4xl mx-auto">
                     <p className="text-slate-300 leading-relaxed">
                       {currentDescription.description}
                     </p>
+                    <div className="mt-2 text-xs text-slate-400 opacity-60">
+                      Click to hide description
+                    </div>
                   </div>
                 </motion.div>
               )}
