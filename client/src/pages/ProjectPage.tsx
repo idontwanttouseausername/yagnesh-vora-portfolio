@@ -76,7 +76,7 @@ export default function ProjectPage() {
         <div className="container mx-auto px-4 md:px-6 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" data-testid="link-home">
-              <Button variant="ghost" className="hover:text-coral-400 p-2 md:px-4 md:py-2 text-[#ffffff] bg-[#9c9494]">
+              <Button variant="ghost" className="hover:text-coral-400 p-2 md:px-4 md:py-2 text-[#ffffff] bg-[#787878]">
                 <ArrowLeft className="w-4 h-4 md:mr-2" />
                 <span className="hidden md:inline">Back to Portfolio</span>
               </Button>
