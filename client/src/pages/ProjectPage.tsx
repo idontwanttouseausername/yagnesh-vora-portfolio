@@ -223,7 +223,12 @@ export default function ProjectPage() {
                   >
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Challenges</h3>
                     <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
-                      <p className="text-slate-300 leading-relaxed">{project.challenges}</p>
+                      <p className="text-slate-300 leading-relaxed">
+                        {project.title === 'Skillry' 
+                          ? "Creating a unified experience for diverse sports while maintaining sport-specific coaching methodologies. To improve the chat functionality for the athlete and coach"
+                          : project.challenges
+                        }
+                      </p>
                     </div>
                   </motion.div>
                 )}
