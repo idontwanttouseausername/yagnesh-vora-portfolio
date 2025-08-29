@@ -3,8 +3,13 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertMessageSchema, insertProjectSchema } from "@shared/schema";
 import { z } from "zod";
+import path from "path";
+import express from "express";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve static files from attached_assets
+  app.use('/attached_assets', express.static(path.join(process.cwd(), 'attached_assets')));
+
   // Get all projects
   app.get("/api/projects", async (req, res) => {
     try {
