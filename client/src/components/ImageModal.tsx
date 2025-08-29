@@ -238,9 +238,9 @@ export default function ImageModal({
               )}
             </AnimatePresence>
 
-            {/* Thumbnail Navigation - At the very bottom */}
+            {/* Thumbnail Navigation - Top right corner */}
             {images.length > 1 && (
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute top-4 right-16 z-20 opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="flex gap-2 bg-black/80 p-2 rounded-lg border border-white/20">
                   {images.map((_, index) => (
                     <button
