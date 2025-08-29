@@ -14,6 +14,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         res.setHeader('Content-Type', 'image/jpeg');
       } else if (filePath.endsWith('.png')) {
         res.setHeader('Content-Type', 'image/png');
+      } else if (filePath.endsWith('.mov')) {
+        res.setHeader('Content-Type', 'video/quicktime');
+      } else if (filePath.endsWith('.mp4')) {
+        res.setHeader('Content-Type', 'video/mp4');
       }
     }
   }));

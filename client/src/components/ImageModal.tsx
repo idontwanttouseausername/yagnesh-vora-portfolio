@@ -12,36 +12,73 @@ interface ImageModalProps {
   projectTitle: string;
 }
 
-// Image descriptions for Skillry project
-const getImageDescription = (index: number): { title: string; description: string } => {
-  const descriptions = [
-    {
-      title: "Home Screen & Navigation",
-      description: "Clear and intuitive home interface redesigned after completing usability tests that suggested to show coaches for the sport user has selected."
-    },
-    {
-      title: "Coaching Requests and Chat",
-      description: "Easy to access requests for coach. This section has been divided into 3 categories according to the request type made by the athlete."
-    },
-    {
-      title: "Chat Interface for Learner",
-      description: "The chat section displays the requests made by the learner and access the rejected requests by the coach."
-    },
-    {
-      title: "Performance Analytics",
-      description: "Data-driven insights showing athlete progress with charts, metrics, and achievement tracking."
-    },
-    {
-      title: "Social Features",
-      description: "Community aspect allowing athletes to connect, share achievements, and motivate each other."
-    },
-    {
-      title: "Settings & Personalization",
-      description: "Customizable user preferences, notification settings, and personalized training plans."
-    }
-  ];
+// Image descriptions for projects
+const getImageDescription = (index: number, projectTitle: string): { title: string; description: string } => {
+  if (projectTitle === 'Skillry') {
+    const skillryDescriptions = [
+      {
+        title: "Home Screen & Navigation",
+        description: "Clear and intuitive home interface redesigned after completing usability tests that suggested to show coaches for the sport user has selected."
+      },
+      {
+        title: "Coaching Requests and Chat",
+        description: "Easy to access requests for coach. This section has been divided into 3 categories according to the request type made by the athlete."
+      },
+      {
+        title: "Chat Interface for Learner",
+        description: "The chat section displays the requests made by the learner and access the rejected requests by the coach."
+      },
+      {
+        title: "Performance Analytics",
+        description: "Data-driven insights showing athlete progress with charts, metrics, and achievement tracking."
+      },
+      {
+        title: "Social Features",
+        description: "Community aspect allowing athletes to connect, share achievements, and motivate each other."
+      },
+      {
+        title: "Settings & Personalization",
+        description: "Customizable user preferences, notification settings, and personalized training plans."
+      }
+    ];
+    return skillryDescriptions[index] || {
+      title: `Screenshot ${index + 1}`,
+      description: "Project screenshot showcasing the user interface and design work."
+    };
+  } else if (projectTitle === 'Meet and Eat') {
+    const meetAndEatDescriptions = [
+      {
+        title: "Home Screen - Find a Huddle",
+        description: "The main landing screen featuring the app's cheerful branding and primary call-to-action button to find dining companions. The warm color palette and friendly illustrations create an inviting atmosphere for cultural food sharing."
+      },
+      {
+        title: "Availability Calendar",
+        description: "Interactive calendar interface allowing users to select their availability for the next two weeks. The intuitive date selection helps coordinate meal times with potential dining partners."
+      },
+      {
+        title: "Join a Huddle - Cultural Matching",
+        description: "Personalized matching screen showing cultural cuisine preferences through flag representations. Users can see potential dining partners from different cultural backgrounds, promoting cross-cultural connections through food."
+      },
+      {
+        title: "Group Chat Interface",
+        description: "Real-time messaging interface for coordinated dining groups. The chat allows participants to discuss meal plans, dietary preferences, and coordinate meeting details for their cultural food sharing experience."
+      },
+      {
+        title: "Scrapbook - Memory Sharing",
+        description: "Digital scrapbook feature where users can document and share their dining experiences, including photos of food and memories with new friends. This creates a lasting record of cultural connections made through the app."
+      },
+      {
+        title: "App Demo Video",
+        description: "Comprehensive demonstration video showcasing the app's key features and user flow, from finding dining partners to creating lasting memories through shared cultural cuisine experiences."
+      }
+    ];
+    return meetAndEatDescriptions[index] || {
+      title: `Screenshot ${index + 1}`,
+      description: "Project screenshot showcasing the user interface and design work."
+    };
+  }
 
-  return descriptions[index] || {
+  return {
     title: `Screenshot ${index + 1}`,
     description: "Project screenshot showcasing the user interface and design work."
   };
@@ -57,7 +94,7 @@ export default function ImageModal({
 }: ImageModalProps) {
   const [showDescription, setShowDescription] = useState(true);
   
-  const currentDescription = getImageDescription(currentIndex);
+  const currentDescription = getImageDescription(currentIndex, projectTitle);
 
   const handlePrevious = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
@@ -151,7 +188,7 @@ export default function ImageModal({
               <Info className="w-5 h-5" />
             </Button>
 
-            {/* Main Image */}
+            {/* Main Image/Video */}
             <motion.div
               key={currentIndex}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -159,16 +196,27 @@ export default function ImageModal({
               transition={{ duration: 0.3 }}
               className="w-full h-full flex items-center justify-center"
             >
-              <img
-                src={images[currentIndex]}
-                alt={`${projectTitle} screenshot ${currentIndex + 1}`}
-                className="max-w-full max-h-full object-contain rounded-lg"
-                data-testid={`modal-image-${currentIndex}`}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
-                }}
-              />
+              {images[currentIndex]?.endsWith('.mov') || images[currentIndex]?.endsWith('.mp4') ? (
+                <video
+                  src={images[currentIndex]}
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                  controls
+                  data-testid={`modal-video-${currentIndex}`}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <img
+                  src={images[currentIndex]}
+                  alt={`${projectTitle} screenshot ${currentIndex + 1}`}
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                  data-testid={`modal-image-${currentIndex}`}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
+                  }}
+                />
+              )}
             </motion.div>
 
             {/* Description Overlay */}
