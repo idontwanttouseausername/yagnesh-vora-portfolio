@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -93,8 +93,13 @@ export default function ImageModal({
   projectTitle 
 }: ImageModalProps) {
   const [showDescription, setShowDescription] = useState(true);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   
   const currentDescription = getImageDescription(currentIndex, projectTitle);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
 
   const handlePrevious = () => {
     const newIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
@@ -112,6 +117,39 @@ export default function ImageModal({
     if (e.key === 'ArrowRight') handleNext();
   };
 
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && images.length > 1) {
+      handleNext();
+    }
+    if (isRightSwipe && images.length > 1) {
+      handlePrevious();
+    }
+  };
+
+  // Auto-hide description on mobile for better viewing
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      setShowDescription(false);
+    } else {
+      setShowDescription(true);
+    }
+  }, [currentIndex]);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -128,6 +166,9 @@ export default function ImageModal({
           <div 
             className="relative w-full h-full max-w-6xl max-h-[90vh] mx-4 group"
             onClick={(e) => e.stopPropagation()}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
           >
             {/* Close Button */}
             <Button
@@ -220,23 +261,23 @@ export default function ImageModal({
               )}
             </motion.div>
 
-            {/* Description Overlay */}
+            {/* Description Overlay - More compact on mobile */}
             <AnimatePresence>
               {showDescription && (
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 50 }}
-                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6 rounded-b-lg cursor-pointer"
+                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-3 md:p-6 rounded-b-lg cursor-pointer max-h-[40vh] md:max-h-[50vh] overflow-y-auto"
                   data-testid="image-description"
                   onClick={() => setShowDescription(false)}
                 >
                   <div className="max-w-4xl mx-auto">
-                    <p className="text-slate-300 leading-relaxed">
+                    <p className="text-slate-300 leading-relaxed text-sm md:text-base line-clamp-4 md:line-clamp-none">
                       {currentDescription.description}
                     </p>
                     <div className="mt-2 text-xs text-slate-400 opacity-60">
-                      Click to hide description
+                      Tap to hide • Swipe to navigate
                     </div>
                   </div>
                 </motion.div>
