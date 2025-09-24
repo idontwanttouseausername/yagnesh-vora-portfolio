@@ -54,7 +54,8 @@ export default function PortfolioSection() {
         <div className="max-w-7xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
             transition={{ duration: 0.8 }}
             className="text-5xl font-bold text-center mb-16"
             style={{ fontFamily: 'Inter, sans-serif' }}
@@ -66,7 +67,8 @@ export default function PortfolioSection() {
           {/* Filter Buttons */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 px-4"
           >
@@ -92,7 +94,8 @@ export default function PortfolioSection() {
           {featuredUXProjects.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mb-16"
             >
@@ -121,7 +124,8 @@ export default function PortfolioSection() {
           {otherProjects.length > 0 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <h3 className="text-xl md:text-2xl font-bold text-center mb-8 text-white">
@@ -148,6 +152,10 @@ export default function PortfolioSection() {
           {featuredUXProjects.length === 0 && (
             <motion.div 
               layout
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
+              transition={{ duration: 0.6 }}
               className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
               data-testid="portfolio-grid"
             >
@@ -181,7 +189,8 @@ export default function PortfolioSection() {
           {filteredItems.length > 0 && (
             <motion.div 
               initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : {}}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
               transition={{ duration: 0.6, delay: 0.8 }}
               className="text-center mt-12 px-4"
             >
