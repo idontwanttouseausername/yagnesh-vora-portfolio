@@ -20,7 +20,7 @@ export default function PortfolioSection() {
   // Separate featured UX projects (Skillry and Meet and Eat)
   const featuredUXProjects = projects.filter(project => 
     (project.title === 'Skillry' || project.title === 'Meet and Eat') && 
-    (activeFilter === 'all' || project.category === 'ux' || project.category === 'Mobile App')
+    (activeFilter === 'all' || project.category === activeFilter)
   );
   
   // Other projects (excluding the featured UX ones)
