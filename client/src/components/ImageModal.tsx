@@ -206,13 +206,13 @@ export default function ImageModal({
               </>
             )}
 
-            {/* Image Title - Top Left */}
-            <div className="absolute top-4 left-4 z-10 bg-black/70 text-white px-4 py-2 rounded-lg max-w-xs">
-              <h3 className="text-lg font-bold leading-tight">
+            {/* Image Title - Top Left - More compact on mobile */}
+            <div className="absolute top-2 left-2 md:top-4 md:left-4 z-10 bg-black/80 text-white px-2 py-1 md:px-4 md:py-2 rounded-lg max-w-[60%] md:max-w-xs">
+              <h3 className="text-sm md:text-lg font-bold leading-tight truncate">
                 {currentDescription.title}
               </h3>
               {images.length > 1 && (
-                <p className="text-xs text-slate-300 mt-1">
+                <p className="text-xs text-slate-300 mt-0.5 md:mt-1">
                   {currentIndex + 1} / {images.length}
                 </p>
               )}
@@ -229,13 +229,13 @@ export default function ImageModal({
               <Info className="w-5 h-5" />
             </Button>
 
-            {/* Main Image/Video */}
+            {/* Main Image/Video - Add padding to avoid overlap */}
             <motion.div
               key={currentIndex}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-full flex items-center justify-center"
+              className="w-full h-full flex items-center justify-center pt-12 pb-4 md:pt-16 md:pb-8 px-2 md:px-4"
             >
               {images[currentIndex]?.endsWith('.mov') || images[currentIndex]?.endsWith('.mp4') ? (
                 <video
@@ -284,14 +284,14 @@ export default function ImageModal({
               )}
             </AnimatePresence>
 
-            {/* Thumbnail Navigation - Top right corner */}
+            {/* Thumbnail Navigation - Top right corner - Smaller on mobile */}
             {images.length > 1 && (
-              <div className="absolute top-4 right-16 z-20 opacity-0 hover:opacity-100 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="flex gap-2 bg-black/80 p-2 rounded-lg border border-white/20">
+              <div className="absolute top-2 right-2 md:top-4 md:right-16 z-20 opacity-80 md:opacity-0 md:hover:opacity-100 md:group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex gap-1 md:gap-2 bg-black/80 p-1.5 md:p-2 rounded-lg border border-white/20">
                   {images.map((_, index) => (
                     <button
                       key={index}
-                      className={`w-3 h-3 rounded-full transition-colors ${
+                      className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-colors ${
                         index === currentIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
                       }`}
                       onClick={() => onNavigate(index)}

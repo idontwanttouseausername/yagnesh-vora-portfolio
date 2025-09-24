@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
 import { ArrowLeft, ExternalLink, Calendar, User, Wrench, Figma, Trello, Video, Scissors, Layout } from "lucide-react";
@@ -30,6 +30,11 @@ export default function ProjectPage() {
     queryKey: ["/api/projects", projectId],
     enabled: !!projectId,
   });
+
+  // Scroll to top when project page loads
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [projectId]);
 
   if (isLoading) {
     return (
