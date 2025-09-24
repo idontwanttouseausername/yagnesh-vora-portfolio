@@ -57,13 +57,15 @@ export default function ContactSection() {
     {
       icon: Mail,
       title: "Email",
-      value: "yagnesh.vora@example.com",
+      value: "yagneshvora7@gmail.com",
+      href: "mailto:yagneshvora7@gmail.com",
       testId: "contact-email"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+61 406 242 179",
+      href: "tel:+61406242179",
       testId: "contact-phone"
     },
     {
@@ -129,7 +131,17 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold">{info.title}</h4>
-                      <p className="text-gray-400">{info.value}</p>
+                      {info.href ? (
+                        <a 
+                          href={info.href} 
+                          className="text-gray-400 hover:text-coral transition-colors duration-200 hover:underline"
+                          data-testid={`${info.testId}-link`}
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="text-gray-400">{info.value}</p>
+                      )}
                     </div>
                   </motion.div>
                 ))}
@@ -209,7 +221,7 @@ export default function ContactSection() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-white">Project Type</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                           <FormControl>
                             <SelectTrigger 
                               className="bg-white/10 border-white/20 text-white focus:border-coral"
