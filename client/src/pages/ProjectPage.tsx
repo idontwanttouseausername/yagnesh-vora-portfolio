@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRoute } from "wouter";
-import { ArrowLeft, ExternalLink, Calendar, User, Wrench, Figma, Trello, Video, Scissors, Layout } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar, User, Wrench, Figma, Trello, Video, Scissors, Layout, Home, Mail } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -307,6 +307,35 @@ export default function ProjectPage() {
           </div>
 
 
+        </motion.div>
+
+        {/* Bottom Navigation Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8 pb-8"
+        >
+          <Link href="/" data-testid="button-bottom-home">
+            <Button 
+              size="lg"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 w-full sm:w-auto"
+            >
+              <Home className="w-5 h-5 mr-2" />
+              Back to Portfolio
+            </Button>
+          </Link>
+          
+          <Link href="/#contact" data-testid="button-bottom-contact">
+            <Button 
+              variant="outline"
+              size="lg"
+              className="border-2 border-coral-400 text-coral-400 hover:bg-coral-400 hover:text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 w-full sm:w-auto"
+            >
+              <Mail className="w-5 h-5 mr-2" />
+              Contact Me
+            </Button>
+          </Link>
         </motion.div>
 
         {/* Image Modal */}
