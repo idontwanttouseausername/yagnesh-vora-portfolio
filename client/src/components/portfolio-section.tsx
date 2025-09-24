@@ -17,6 +17,17 @@ export default function PortfolioSection() {
     (project) => project.category
   );
 
+  // Separate featured UX projects (Skillry and Meet and Eat)
+  const featuredUXProjects = projects.filter(project => 
+    (project.title === 'Skillry' || project.title === 'Meet and Eat') && 
+    (activeFilter === 'all' || project.category === 'ux' || project.category === 'Mobile App')
+  );
+  
+  // Other projects (excluding the featured UX ones)
+  const otherProjects = filteredItems.filter(project => 
+    project.title !== 'Skillry' && project.title !== 'Meet and Eat'
+  );
+
   const filterButtons = [
     { key: "all", label: "All Projects" },
     { key: "ux", label: "UX Design" },
@@ -77,25 +88,83 @@ export default function PortfolioSection() {
             ))}
           </motion.div>
 
-          {/* Portfolio Grid */}
-          <motion.div 
-            layout
-            className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
-            data-testid="portfolio-grid"
-          >
-            {filteredItems.map((project, index) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <PortfolioCard project={project} />
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Featured UX Projects Section */}
+          {featuredUXProjects.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-16"
+            >
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-white">
+                Featured <span className="bg-gradient-primary bg-clip-text text-transparent">UX Projects</span>
+              </h3>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
+                {featuredUXProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.1 * index }}
+                    className="transform hover:scale-105 transition-all duration-300"
+                  >
+                    <div className="glass-morphism rounded-2xl overflow-hidden shadow-2xl border border-white/20 hover:border-coral/30 transition-all duration-300">
+                      <PortfolioCard project={project} isFeatured={true} />
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Other Projects Grid */}
+          {otherProjects.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <h3 className="text-xl md:text-2xl font-bold text-center mb-8 text-white">
+                Other Projects
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" data-testid="portfolio-grid">
+                {otherProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <PortfolioCard project={project} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+          
+          {/* Show all projects in single grid if no separation needed */}
+          {featuredUXProjects.length === 0 && (
+            <motion.div 
+              layout
+              className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
+              data-testid="portfolio-grid"
+            >
+              {filteredItems.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <PortfolioCard project={project} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
 
           {filteredItems.length === 0 && (
             <motion.div
