@@ -9,6 +9,7 @@ export interface IStorage {
   getProjectsByCategory(category: string): Promise<Project[]>;
   getFeaturedProjects(): Promise<Project[]>;
   createProject(project: InsertProject): Promise<Project>;
+  updateProject(id: string, updates: Partial<InsertProject>): Promise<Project | undefined>;
   
   // Messages
   createMessage(message: InsertMessage): Promise<Message>;
@@ -36,6 +37,11 @@ export class DatabaseStorage implements IStorage {
   async createProject(project: InsertProject): Promise<Project> {
     const [newProject] = await db.insert(projects).values(project).returning();
     return newProject;
+  }
+
+  async updateProject(id: string, updates: Partial<InsertProject>): Promise<Project | undefined> {
+    const [updatedProject] = await db.update(projects).set(updates).where(eq(projects.id, id)).returning();
+    return updatedProject || undefined;
   }
 
   async createMessage(message: InsertMessage): Promise<Message> {
