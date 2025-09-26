@@ -173,12 +173,12 @@ export default function ImageModal({
             {/* Close Button */}
             <Button
               variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white"
+              size="lg"
+              className="absolute top-4 right-4 z-10 bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
               onClick={onClose}
               data-testid="button-close-modal"
             >
-              <X className="w-5 h-5" />
+              <X className="w-8 h-8" />
             </Button>
 
             {/* Navigation Buttons - Only visible on hover */}
