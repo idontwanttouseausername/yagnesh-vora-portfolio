@@ -5,6 +5,7 @@ import { insertMessageSchema, insertProjectSchema } from "@shared/schema";
 import { z } from "zod";
 import path from "path";
 import express from "express";
+import { sendContactFormNotification } from "./sendgrid"; // SendGrid integration
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static files from attached_assets
@@ -71,7 +72,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
     try {
       const validatedData = insertMessageSchema.parse(req.body);
+      
+      // Save to database
       const message = await storage.createMessage(validatedData);
+      
+      // Send email notification
+      const emailSent = await sendContactFormNotification({
+        name: validatedData.name,
+        email: validatedData.email,
+        projectType: validatedData.projectType,
+        message: validatedData.message,
+      });
+      
+      if (!emailSent) {
+        console.warn('Failed to send email notification for contact form submission');
+      }
+      
       res.status(201).json({ 
         success: true, 
         message: "Message sent successfully!",
@@ -84,6 +100,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           details: error.errors 
         });
       } else {
+        console.error('Contact form error:', error);
         res.status(500).json({ error: "Failed to send message" });
       }
     }
