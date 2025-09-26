@@ -4,8 +4,16 @@ if (!process.env.SENDGRID_API_KEY) {
   throw new Error("SENDGRID_API_KEY environment variable must be set");
 }
 
+// Debug the API key format
+const apiKey = process.env.SENDGRID_API_KEY.trim();
+console.log(`SendGrid API key starts with: "${apiKey.substring(0, 3)}" and has length: ${apiKey.length}`);
+
+if (!apiKey.startsWith('SG.')) {
+  console.error('SendGrid API key does not start with "SG." - check your key format');
+}
+
 const mailService = new MailService();
-mailService.setApiKey(process.env.SENDGRID_API_KEY!);
+mailService.setApiKey(apiKey);
 
 interface EmailParams {
   to: string;
