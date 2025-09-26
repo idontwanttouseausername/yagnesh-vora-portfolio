@@ -4,23 +4,15 @@ if (!process.env.SENDGRID_API_KEY) {
   throw new Error("SENDGRID_API_KEY environment variable must be set");
 }
 
-// Debug the API key format
-const apiKey = process.env.SENDGRID_API_KEY.trim();
-console.log(`SendGrid API key starts with: "${apiKey.substring(0, 3)}" and has length: ${apiKey.length}`);
-
-if (!apiKey.startsWith('SG.')) {
-  console.error('SendGrid API key does not start with "SG." - check your key format');
-}
-
 const mailService = new MailService();
-mailService.setApiKey(apiKey);
+mailService.setApiKey(process.env.SENDGRID_API_KEY!);
 
 interface EmailParams {
   to: string;
   from: string;
   subject: string;
-  text?: string;
-  html?: string;
+  text?: string | undefined;
+  html?: string | undefined;
 }
 
 export async function sendEmail(params: EmailParams): Promise<boolean> {
@@ -29,8 +21,8 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
       to: params.to,
       from: params.from,
       subject: params.subject,
-      text: params.text,
-      html: params.html,
+      text: params.text || undefined,
+      html: params.html || undefined,
     });
     return true;
   } catch (error) {
@@ -43,7 +35,7 @@ export async function sendEmail(params: EmailParams): Promise<boolean> {
 export async function sendContactFormNotification(data: {
   name: string;
   email: string;
-  projectType: string;
+  projectType: string | null;
   message: string;
 }): Promise<boolean> {
   const emailContent = `
@@ -51,7 +43,7 @@ New contact form submission from your portfolio:
 
 Name: ${data.name}
 Email: ${data.email}
-Project Type: ${data.projectType}
+Project Type: ${data.projectType || 'Not specified'}
 
 Message:
 ${data.message}
@@ -64,7 +56,7 @@ This email was sent from your portfolio contact form.
     <h2>New Contact Form Submission</h2>
     <p><strong>Name:</strong> ${data.name}</p>
     <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Project Type:</strong> ${data.projectType}</p>
+    <p><strong>Project Type:</strong> ${data.projectType || 'Not specified'}</p>
     <h3>Message:</h3>
     <p>${data.message.replace(/\n/g, '<br>')}</p>
     <hr>

@@ -80,7 +80,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const emailSent = await sendContactFormNotification({
         name: validatedData.name,
         email: validatedData.email,
-        projectType: validatedData.projectType,
+        projectType: validatedData.projectType || null,
         message: validatedData.message,
       });
       
