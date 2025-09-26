@@ -39,34 +39,68 @@ export async function sendContactFormNotification(data: {
   message: string;
 }): Promise<boolean> {
   const emailContent = `
-New contact form submission from your portfolio:
+Hello Yagnesh,
 
+You have received a new contact form submission through your portfolio website.
+
+CONTACT DETAILS:
 Name: ${data.name}
 Email: ${data.email}
 Project Type: ${data.projectType || 'Not specified'}
 
-Message:
+MESSAGE:
 ${data.message}
 
 ---
-This email was sent from your portfolio contact form.
+You can reply directly to this email to respond to ${data.name}.
+Portfolio Contact Form | Yagnesh Vora UX Design
   `.trim();
 
   const htmlContent = `
-    <h2>New Contact Form Submission</h2>
-    <p><strong>Name:</strong> ${data.name}</p>
-    <p><strong>Email:</strong> ${data.email}</p>
-    <p><strong>Project Type:</strong> ${data.projectType || 'Not specified'}</p>
-    <h3>Message:</h3>
-    <p>${data.message.replace(/\n/g, '<br>')}</p>
-    <hr>
-    <p style="color: #666; font-size: 12px;">This email was sent from your portfolio contact form.</p>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fff; padding: 20px;">
+      <div style="border-bottom: 2px solid #2563eb; padding-bottom: 20px; margin-bottom: 20px;">
+        <h1 style="color: #1e293b; margin: 0;">New Portfolio Inquiry</h1>
+        <p style="color: #64748b; margin: 5px 0 0 0;">Contact Form Submission</p>
+      </div>
+      
+      <div style="margin-bottom: 30px;">
+        <h2 style="color: #1e293b; font-size: 18px; margin-bottom: 15px;">Contact Information</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px 0; color: #374151; font-weight: bold; width: 120px;">Name:</td>
+            <td style="padding: 8px 0; color: #1f2937;">${data.name}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #374151; font-weight: bold;">Email:</td>
+            <td style="padding: 8px 0; color: #1f2937;"><a href="mailto:${data.email}" style="color: #2563eb; text-decoration: none;">${data.email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; color: #374151; font-weight: bold;">Project Type:</td>
+            <td style="padding: 8px 0; color: #1f2937;">${data.projectType || 'Not specified'}</td>
+          </tr>
+        </table>
+      </div>
+      
+      <div style="margin-bottom: 30px;">
+        <h2 style="color: #1e293b; font-size: 18px; margin-bottom: 15px;">Message</h2>
+        <div style="background: #f8fafc; padding: 15px; border-left: 4px solid #2563eb; border-radius: 4px;">
+          <p style="margin: 0; line-height: 1.6; color: #374151;">${data.message.replace(/\n/g, '<br>')}</p>
+        </div>
+      </div>
+      
+      <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; text-align: center;">
+        <p style="color: #9ca3af; font-size: 14px; margin: 0;">
+          This email was sent from your portfolio contact form<br>
+          <strong>Yagnesh Vora</strong> | UX Designer & Creative Professional
+        </p>
+      </div>
+    </div>
   `;
 
   return sendEmail({
     to: 'yagneshvora7@gmail.com',
-    from: 'yagneshvora7@gmail.com', // Must be verified sender in SendGrid
-    subject: `New Contact Form Message from ${data.name}`,
+    from: 'Yagnesh Vora Portfolio <yagneshvora7@gmail.com>', // Professional sender name
+    subject: `Portfolio Inquiry from ${data.name} - ${data.projectType || 'New Project'}`,
     text: emailContent,
     html: htmlContent,
   });
