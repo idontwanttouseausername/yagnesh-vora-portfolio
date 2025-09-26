@@ -13,10 +13,22 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function ContactSection() {
   const { ref, isVisible } = useScrollAnimation();
   const { toast } = useToast();
+  const [socialDialogOpen, setSocialDialogOpen] = useState(false);
+  const [pendingSocialLink, setPendingSocialLink] = useState<string | null>(null);
 
   const form = useForm<InsertMessage>({
     resolver: zodResolver(insertMessageSchema),
@@ -51,6 +63,20 @@ export default function ContactSection() {
 
   const onSubmit = (data: InsertMessage) => {
     contactMutation.mutate(data);
+  };
+
+  const handleSocialClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    setPendingSocialLink(href);
+    setSocialDialogOpen(true);
+  };
+
+  const proceedToSocialLink = () => {
+    if (pendingSocialLink) {
+      window.open(pendingSocialLink, '_blank', 'noopener,noreferrer');
+    }
+    setSocialDialogOpen(false);
+    setPendingSocialLink(null);
   };
 
   const contactInfo = [
@@ -155,11 +181,10 @@ export default function ContactSection() {
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={(e) => handleSocialClick(e, social.href)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 glass-morphism rounded-full flex items-center justify-center hover:bg-coral hover:text-white transition-all duration-300"
+                    className="w-12 h-12 glass-morphism rounded-full flex items-center justify-center hover:bg-coral hover:text-white transition-all duration-300 cursor-pointer"
                     data-testid={`contact-social-${social.label.toLowerCase()}`}
                   >
                     <social.icon size={20} />
@@ -277,6 +302,32 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+
+      {/* Social Media Warning Dialog */}
+      <AlertDialog open={socialDialogOpen} onOpenChange={setSocialDialogOpen}>
+        <AlertDialogContent className="bg-deep-navy border-white/20 text-white">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-xl font-semibold">
+              Don't Judge 😅
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-300">
+              Hey! Just a casual heads up - I'm in the process of moving to this new site, so my social profiles might still show some old work. 
+              But feel free to check them out and connect!
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="flex gap-3">
+            <AlertDialogCancel className="bg-white/10 border-white/20 text-white hover:bg-white/20">
+              Maybe Later
+            </AlertDialogCancel>
+            <AlertDialogAction 
+              onClick={proceedToSocialLink}
+              className="bg-gradient-primary hover:shadow-lg"
+            >
+              Let's Connect!
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </section>
   );
 }
