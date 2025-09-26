@@ -308,10 +308,9 @@ export default function ContactSection() {
         <AlertDialogContent className="bg-deep-navy border-white/20 text-white">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-xl font-semibold">
-              Don't Judge 😅
+              Just a Quick Note 👋
             </AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
-              Just a quick note 👋
               My social profiles are a mix of personal and professional, and I'm in the middle of updating them. Feel free to take a look and connect—I'd love to stay in touch!
             </AlertDialogDescription>
           </AlertDialogHeader>
