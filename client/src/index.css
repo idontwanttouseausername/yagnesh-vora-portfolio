@@ -97,6 +97,10 @@
     color: var(--coral);
   }
 
+  .bg-coral {
+    background-color: var(--coral);
+  }
+
   .bg-deep-navy {
     background-color: var(--deep-navy);
   }

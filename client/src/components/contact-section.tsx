@@ -77,10 +77,8 @@ export default function ContactSection() {
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Github, href: "#", label: "Behance" },
-    { icon: Dribbble, href: "#", label: "Dribbble" },
-    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/everythingux/", label: "LinkedIn" },
+    { icon: Instagram, href: "https://www.instagram.com/yaggy.v/", label: "Instagram" },
   ];
 
   return (
@@ -157,6 +155,8 @@ export default function ContactSection() {
                   <motion.a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="w-12 h-12 glass-morphism rounded-full flex items-center justify-center hover:bg-coral hover:text-white transition-all duration-300"
