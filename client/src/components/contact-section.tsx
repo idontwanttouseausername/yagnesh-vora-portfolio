@@ -311,8 +311,8 @@ export default function ContactSection() {
               Don't Judge 😅
             </AlertDialogTitle>
             <AlertDialogDescription className="text-gray-300">
-              Hey! Just a casual heads up - I'm in the process of moving to this new site, so my social profiles might still show some old work. 
-              But feel free to check them out and connect!
+              Just a quick note 👋
+              My social profiles are a mix of personal and professional, and I'm in the middle of updating them. Feel free to take a look and connect—I'd love to stay in touch!
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="flex gap-3">
