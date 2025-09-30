@@ -54,14 +54,6 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
       </div>
       
       <div className={`${isFeatured ? 'p-6 md:p-8' : 'p-3 sm:p-4 md:p-6'}`}>
-        {isFeatured && (
-          <div className="flex items-center gap-2 mb-3">
-            <span className="bg-gradient-primary px-3 py-1 rounded-full text-xs font-semibold text-white">
-              Featured
-            </span>
-            <span className="text-coral text-xs font-semibold">UX Design</span>
-          </div>
-        )}
         <h3 className={`font-semibold mb-1 sm:mb-2 ${
           isFeatured 
             ? 'text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4' 
@@ -77,16 +69,12 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
           {project.description}
         </p>
         
-        {project.tags && project.tags.length > 0 && (
-          <div className={`flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-4 ${
-            isFeatured ? 'mb-4 md:mb-6' : ''
-          }`}>
-            {project.tags.slice(0, isFeatured ? 4 : 3).map((tag, index) => (
+        {project.tags && project.tags.length > 0 && !isFeatured && (
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-2 sm:mb-4">
+            {project.tags.slice(0, 3).map((tag, index) => (
               <span 
                 key={index} 
-                className={`bg-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-gray-300 ${
-                  isFeatured ? 'text-sm px-3 py-1' : 'text-xs'
-                }`}
+                className="bg-white/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-gray-300 text-xs"
                 data-testid={`project-tag-${project.id}-${index}`}
               >
                 {tag}
@@ -95,13 +83,7 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
           </div>
         )}
         
-        <div className="flex justify-between items-center">
-          <span 
-            className="text-coral text-sm font-semibold"
-            data-testid={`project-category-${project.id}`}
-          >
-            {getCategoryLabel(project.category)}
-          </span>
+        <div className="flex justify-end items-center">
           <motion.div
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
