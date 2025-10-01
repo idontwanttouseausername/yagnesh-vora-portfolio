@@ -110,7 +110,10 @@ export default function ProjectPage() {
                 <Badge 
                   key={tag} 
                   variant="secondary" 
-                  className="bg-slate-700/50 text-slate-300 hover:bg-slate-600/50"
+                  className={project.title === 'Skillry' 
+                    ? "bg-gradient-to-r from-blue-600/80 to-teal-600/80 text-white hover:from-blue-700/90 hover:to-teal-700/90 border border-blue-400/30" 
+                    : "bg-slate-700/50 text-slate-300 hover:bg-slate-600/50"
+                  }
                   data-testid={`badge-tag-${tag.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {tag}
@@ -193,7 +196,7 @@ export default function ProjectPage() {
                     <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
                       {project.title === 'Skillry' ? (
                         <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
-                          <li>Evaluate the chat section and redesign user flow to make a coaching request.</li>
+                          <li>Evaluate the chat section and redesign to improve the user flow to make a coaching request</li>
                         </ul>
                       ) : (
                         <p className="text-slate-300 leading-relaxed">
