@@ -14,17 +14,21 @@ interface ImageModalProps {
 }
 
 // Zoom Controls Component
-const ZoomControls = () => {
+const ZoomControls = ({ onZoomChange }: { onZoomChange: (isZoomed: boolean) => void }) => {
   const { zoomIn, zoomOut, resetTransform } = useControls();
   
   return (
-    <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
+    <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2 ml-12 md:ml-0">
       <Button
         variant="ghost"
         size="icon"
         className="bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
-        onClick={() => zoomIn()}
+        onClick={() => {
+          zoomIn();
+          onZoomChange(true);
+        }}
         title="Zoom In"
+        aria-label="Zoom in"
         data-testid="button-zoom-in"
       >
         <ZoomIn className="w-5 h-5" />
@@ -34,8 +38,11 @@ const ZoomControls = () => {
         variant="ghost"
         size="icon"
         className="bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
-        onClick={() => zoomOut()}
+        onClick={() => {
+          zoomOut();
+        }}
         title="Zoom Out"
+        aria-label="Zoom out"
         data-testid="button-zoom-out"
       >
         <ZoomOut className="w-5 h-5" />
@@ -45,8 +52,12 @@ const ZoomControls = () => {
         variant="ghost"
         size="icon"
         className="bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
-        onClick={() => resetTransform()}
+        onClick={() => {
+          resetTransform();
+          onZoomChange(false);
+        }}
         title="Reset Zoom"
+        aria-label="Reset zoom to default"
         data-testid="button-zoom-reset"
       >
         <RotateCcw className="w-5 h-5" />
@@ -138,6 +149,7 @@ export default function ImageModal({
   const [showDescription, setShowDescription] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
   
   const currentDescription = getImageDescription(currentIndex, projectTitle);
 
@@ -170,7 +182,7 @@ export default function ImageModal({
   };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd || isZoomed) return;
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
@@ -298,8 +310,10 @@ export default function ImageModal({
                   centerOnInit
                   wheel={{ step: 0.1 }}
                   doubleClick={{ mode: "toggle", step: 0.7 }}
+                  onZoomStart={() => setIsZoomed(true)}
+                  onZoomStop={({ state }) => setIsZoomed(state.scale !== 1)}
                 >
-                  <ZoomControls />
+                  <ZoomControls onZoomChange={setIsZoomed} />
                   <TransformComponent
                     wrapperClass="!w-full !h-full"
                     contentClass="!w-full !h-full flex items-center justify-center"
@@ -308,7 +322,7 @@ export default function ImageModal({
                       src={images[currentIndex]}
                       alt={`${projectTitle} screenshot ${currentIndex + 1}`}
                       className={`max-w-full max-h-full object-contain rounded-lg ${
-                        currentIndex === 0 && images[currentIndex]?.includes('user-flow') 
+                        images[currentIndex]?.includes('user-flow') 
                           ? 'p-6 md:p-12 bg-white/10' 
                           : ''
                       }`}
