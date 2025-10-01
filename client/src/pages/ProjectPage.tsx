@@ -218,7 +218,7 @@ export default function ProjectPage() {
                     <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
                       {project.title === 'Skillry' ? (
                         <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
-                          <li>To conduct usability tests to to improve the user flow for making a coaching request using journey maps.</li>
+                          <li>To conduct usability tests to improve the user flow for making a coaching request using journey maps.</li>
                           <li>To redesign the chat system for improved control of requests.</li>
                         </ul>
                       ) : (
