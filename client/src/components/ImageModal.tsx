@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight, Info } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Info, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch";
 
 interface ImageModalProps {
   images: string[];
@@ -11,6 +12,48 @@ interface ImageModalProps {
   onNavigate: (index: number) => void;
   projectTitle: string;
 }
+
+// Zoom Controls Component
+const ZoomControls = () => {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+  
+  return (
+    <div className="absolute left-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
+        onClick={() => zoomIn()}
+        title="Zoom In"
+        data-testid="button-zoom-in"
+      >
+        <ZoomIn className="w-5 h-5" />
+      </Button>
+      
+      <Button
+        variant="ghost"
+        size="icon"
+        className="bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
+        onClick={() => zoomOut()}
+        title="Zoom Out"
+        data-testid="button-zoom-out"
+      >
+        <ZoomOut className="w-5 h-5" />
+      </Button>
+      
+      <Button
+        variant="ghost"
+        size="icon"
+        className="bg-black/70 hover:bg-black/90 text-white border border-white/20 hover:border-white/40 transition-all duration-200"
+        onClick={() => resetTransform()}
+        title="Reset Zoom"
+        data-testid="button-zoom-reset"
+      >
+        <RotateCcw className="w-5 h-5" />
+      </Button>
+    </div>
+  );
+};
 
 // Image descriptions for projects
 const getImageDescription = (index: number, projectTitle: string): { title: string; description: string } => {
@@ -229,7 +272,7 @@ export default function ImageModal({
               <Info className="w-5 h-5" />
             </Button>
 
-            {/* Main Image/Video - Add padding to avoid overlap */}
+            {/* Main Image/Video with Zoom - Add padding to avoid overlap */}
             <motion.div
               key={currentIndex}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -248,20 +291,35 @@ export default function ImageModal({
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                <img
-                  src={images[currentIndex]}
-                  alt={`${projectTitle} screenshot ${currentIndex + 1}`}
-                  className={`max-w-full max-h-full object-contain rounded-lg ${
-                    currentIndex === 0 && images[currentIndex]?.includes('user-flow') 
-                      ? 'p-4 md:p-8 bg-white/5' 
-                      : ''
-                  }`}
-                  data-testid={`modal-image-${currentIndex}`}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
-                  }}
-                />
+                <TransformWrapper
+                  initialScale={1}
+                  minScale={0.5}
+                  maxScale={4}
+                  centerOnInit
+                  wheel={{ step: 0.1 }}
+                  doubleClick={{ mode: "toggle", step: 0.7 }}
+                >
+                  <ZoomControls />
+                  <TransformComponent
+                    wrapperClass="!w-full !h-full"
+                    contentClass="!w-full !h-full flex items-center justify-center"
+                  >
+                    <img
+                      src={images[currentIndex]}
+                      alt={`${projectTitle} screenshot ${currentIndex + 1}`}
+                      className={`max-w-full max-h-full object-contain rounded-lg ${
+                        currentIndex === 0 && images[currentIndex]?.includes('user-flow') 
+                          ? 'p-6 md:p-12 bg-white/10' 
+                          : ''
+                      }`}
+                      data-testid={`modal-image-${currentIndex}`}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = `https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600`;
+                      }}
+                    />
+                  </TransformComponent>
+                </TransformWrapper>
               )}
             </motion.div>
 
