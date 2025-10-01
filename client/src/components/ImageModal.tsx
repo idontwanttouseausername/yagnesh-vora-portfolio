@@ -17,6 +17,10 @@ const getImageDescription = (index: number, projectTitle: string): { title: stri
   if (projectTitle === 'Skillry') {
     const skillryDescriptions = [
       {
+        title: "Complete User Flow",
+        description: "End-to-end user journey showing the entire coaching request process from home page navigation through chat notifications, request management, pending requests, rejections, and completed interactions."
+      },
+      {
         title: "Home Screen & Navigation",
         description: "Clear and intuitive home interface redesigned after completing usability tests that suggested to show coaches for the sport user has selected."
       },
