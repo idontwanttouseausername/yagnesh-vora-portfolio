@@ -251,7 +251,11 @@ export default function ImageModal({
                 <img
                   src={images[currentIndex]}
                   alt={`${projectTitle} screenshot ${currentIndex + 1}`}
-                  className="max-w-full max-h-full object-contain rounded-lg"
+                  className={`max-w-full max-h-full object-contain rounded-lg ${
+                    currentIndex === 0 && images[currentIndex]?.includes('user-flow') 
+                      ? 'p-4 md:p-8 bg-white/5' 
+                      : ''
+                  }`}
                   data-testid={`modal-image-${currentIndex}`}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
