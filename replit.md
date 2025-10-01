@@ -51,6 +51,7 @@ The application uses two main tables:
 - **Hero Section**: Animated landing area with floating elements
 - **About Section**: Skills showcase with animated progress bars
 - **Portfolio Section**: Filterable project gallery with category tabs
+- **Image Modal**: Full-screen gallery viewer with zoom controls (zoom in/out, reset), pan functionality, and swipe navigation (disabled when zoomed)
 - **Contact Section**: Form with validation and toast notifications
 - **Footer**: Simple footer with links and branding
 
@@ -93,6 +94,7 @@ The application uses two main tables:
 - **tailwindcss**: Utility-first CSS framework
 - **class-variance-authority**: Component variant management
 - **cmdk**: Command palette component
+- **react-zoom-pan-pinch**: Image zoom and pan functionality for gallery modal
 
 ### Development Tools
 - **tsx**: TypeScript execution for development
