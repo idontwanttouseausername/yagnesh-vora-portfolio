@@ -242,14 +242,19 @@ export default function ProjectPage() {
                   >
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Outcomes & Impact</h3>
                     <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
-                      <p className="text-slate-300 leading-relaxed">
-                        {project.title === 'Meet and Eat'
-                          ? "Delivered a fully functional prototype in the Apple Foundation Program, showcasing the potential of food as a medium for inclusivity and cross-cultural engagement."
-                          : project.title === 'Skillry' 
-                          ? "Successfully launched the version 0.6 of the app in Q3 of 2024 with an improved and seamless user experience for role-based access control (RBAC)."
-                          : project.outcomes
-                        }
-                      </p>
+                      {project.title === 'Skillry' ? (
+                        <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
+                          <li>Added control for the coach to review requests before accepting it.</li>
+                          <li>Successfully redesigned the chat features with an improvised user flow to make a coaching request that was released in Q3 of 2024.</li>
+                        </ul>
+                      ) : (
+                        <p className="text-slate-300 leading-relaxed">
+                          {project.title === 'Meet and Eat'
+                            ? "Delivered a fully functional prototype in the Apple Foundation Program, showcasing the potential of food as a medium for inclusivity and cross-cultural engagement."
+                            : project.outcomes
+                          }
+                        </p>
+                      )}
                     </div>
                   </motion.div>
                 )}
