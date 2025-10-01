@@ -90,7 +90,6 @@ export default function ProjectPage() {
           </div>
         </div>
       </nav>
-
       {/* Main Content */}
       <div className="container mx-auto px-4 md:px-6 pt-32 md:pt-32 pb-16">
         <motion.div
@@ -194,7 +193,8 @@ export default function ProjectPage() {
                     <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
                       {project.title === 'Skillry' ? (
                         <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
-                          <li>Evaluate the chat section and redesign to improve the user flow to make a coaching request</li>
+                          <li>Evaluate the chat section and redesign to improve the user flow to make a coaching request.
+</li>
                         </ul>
                       ) : (
                         <p className="text-slate-300 leading-relaxed">
