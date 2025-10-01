@@ -264,7 +264,7 @@ export default function ImageModal({
                   {({ zoomIn, zoomOut, resetTransform }) => (
                     <>
                       {/* Zoom Controls */}
-                      <div className="absolute left-16 md:left-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2 pointer-events-none">
+                      <div className="absolute bottom-20 md:bottom-24 left-4 z-20 flex flex-row gap-2 pointer-events-none">
                         <Button
                           variant="ghost"
                           size="icon"
