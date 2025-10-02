@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "wouter";
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
 import PortfolioSection from "@/components/portfolio-section";
@@ -5,6 +7,20 @@ import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 
 export default function Home() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-deep-navy text-white custom-scrollbar">
       <Navigation />
