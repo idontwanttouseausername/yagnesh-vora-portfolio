@@ -198,12 +198,13 @@ export default function ProjectPage() {
                         <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
                           <li>Evaluate the chat section and redesign to improve the user flow to make a coaching request</li>
                         </ul>
+                      ) : project.title === 'Meet and Eat' ? (
+                        <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
+                          <li>Design and build a working app in just 3 weeks that fosters cultural exchange and connections among university students through food.</li>
+                        </ul>
                       ) : (
                         <p className="text-slate-300 leading-relaxed">
-                          {project.title === 'Meet and Eat'
-                            ? "Design and build a working app in just 3 weeks that fosters cultural exchange and connections among university students through food."
-                            : project.challenges
-                          }
+                          {project.challenges}
                         </p>
                       )}
                     </div>
@@ -224,12 +225,13 @@ export default function ProjectPage() {
                           <li>To conduct usability tests to improve the user flow for making a coaching request using journey maps.</li>
                           <li>To redesign the chat system for improved control of requests.</li>
                         </ul>
+                      ) : project.title === 'Meet and Eat' ? (
+                        <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
+                          <li>Created Meet and Eat, an app that enables students to share and explore diverse cuisines while forming meaningful social connections.</li>
+                        </ul>
                       ) : (
                         <p className="text-slate-300 leading-relaxed">
-                          {project.title === 'Meet and Eat'
-                            ? "Created Meet and Eat, an app that enables students to share and explore diverse cuisines while forming meaningful social connections."
-                            : project.solutions
-                          }
+                          {project.solutions}
                         </p>
                       )}
                     </div>
@@ -250,12 +252,13 @@ export default function ProjectPage() {
                           <li>Added control for the coach to review requests before accepting it.</li>
                           <li>Successfully redesigned the chat features with an improvised user flow to make a coaching request that was released in Q3 of 2024.</li>
                         </ul>
+                      ) : project.title === 'Meet and Eat' ? (
+                        <ul className="text-slate-300 leading-relaxed list-disc list-inside space-y-2">
+                          <li>Delivered a fully functional prototype in the Apple Foundation Program, showcasing the potential of food as a medium for inclusivity and cross-cultural engagement.</li>
+                        </ul>
                       ) : (
                         <p className="text-slate-300 leading-relaxed">
-                          {project.title === 'Meet and Eat'
-                            ? "Delivered a fully functional prototype in the Apple Foundation Program, showcasing the potential of food as a medium for inclusivity and cross-cultural engagement."
-                            : project.outcomes
-                          }
+                          {project.outcomes}
                         </p>
                       )}
                     </div>
