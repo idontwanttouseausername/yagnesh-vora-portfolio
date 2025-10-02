@@ -110,7 +110,7 @@ export default function ProjectPage() {
                 <Badge 
                   key={tag} 
                   variant="secondary" 
-                  className={project.title === 'Skillry' 
+                  className={(project.title === 'Skillry' || project.title === 'Meet and Eat')
                     ? "bg-gradient-to-r from-blue-600/80 to-teal-600/80 text-white hover:from-blue-700/90 hover:to-teal-700/90 border border-blue-400/30" 
                     : "bg-slate-700/50 text-slate-300 hover:bg-slate-600/50"
                   }
