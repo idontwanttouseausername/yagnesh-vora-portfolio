@@ -22,6 +22,11 @@ export default function PortfolioSection() {
     (project.title === 'Skillry' || project.title === 'Meet and Eat') && 
     (activeFilter === 'all' || project.category === activeFilter)
   );
+  
+  // Coming soon projects (Photography and Videography)
+  const comingSoonProjects = filteredItems.filter(project => 
+    project.title !== 'Skillry' && project.title !== 'Meet and Eat'
+  );
 
   const filterButtons = [
     { key: "all", label: "All Projects" },
@@ -116,7 +121,7 @@ export default function PortfolioSection() {
           )}
 
           
-          {featuredUXProjects.length === 0 && (
+          {featuredUXProjects.length === 0 && comingSoonProjects.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -127,22 +132,40 @@ export default function PortfolioSection() {
             </motion.div>
           )}
 
-          {/* More Projects Coming Soon */}
-          {featuredUXProjects.length > 0 && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+          {/* Coming Soon Projects Section */}
+          {comingSoonProjects.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-center mt-12 px-4"
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-16"
             >
-              <div className="max-w-4xl mx-auto">
-                <img
-                  src="/coming-soon.png"
-                  alt="More projects coming soon"
-                  className="w-full h-auto rounded-lg shadow-2xl"
-                  data-testid="image-coming-soon"
-                />
+              <div className="text-center mb-8">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
+                  Coming Soon
+                </h3>
+                <p className="text-slate-400 text-sm md:text-base">
+                  Preview of upcoming projects in Photography & Video Production
+                </p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" data-testid="coming-soon-grid">
+                {comingSoonProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="relative"
+                  >
+                    <div className="absolute top-3 right-3 z-10 bg-coral-500/90 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      Coming Soon
+                    </div>
+                    <PortfolioCard project={project} />
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           )}
