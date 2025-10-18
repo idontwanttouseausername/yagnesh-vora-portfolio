@@ -136,11 +136,13 @@ export default function PortfolioSection() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="text-center mt-12 px-4"
             >
-              <div
-                className="glass-morphism px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base inline-block text-slate-300"
-                data-testid="text-coming-soon"
-              >
-                More Projects are coming soon
+              <div className="max-w-4xl mx-auto">
+                <img
+                  src="/coming-soon.png"
+                  alt="More projects coming soon"
+                  className="w-full h-auto rounded-lg shadow-2xl"
+                  data-testid="image-coming-soon"
+                />
               </div>
             </motion.div>
           )}
