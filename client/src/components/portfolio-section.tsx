@@ -22,11 +22,6 @@ export default function PortfolioSection() {
     (project.title === 'Skillry' || project.title === 'Meet and Eat') && 
     (activeFilter === 'all' || project.category === activeFilter)
   );
-  
-  // Other projects (excluding the featured UX ones)
-  const otherProjects = filteredItems.filter(project => 
-    project.title !== 'Skillry' && project.title !== 'Meet and Eat'
-  );
 
   const filterButtons = [
     { key: "all", label: "All Projects" },
@@ -120,61 +115,8 @@ export default function PortfolioSection() {
             </motion.div>
           )}
 
-          {/* Other Projects Grid */}
-          {otherProjects.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <h3 className="text-xl md:text-2xl font-bold text-center mb-8 text-white">
-                Other Projects
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" data-testid="portfolio-grid">
-                {otherProjects.map((project, index) => (
-                  <motion.div
-                    key={project.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <PortfolioCard project={project} />
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
           
-          {/* Show all projects in single grid if no separation needed */}
           {featuredUXProjects.length === 0 && (
-            <motion.div 
-              layout
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8"
-              data-testid="portfolio-grid"
-            >
-              {filteredItems.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <PortfolioCard project={project} />
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-
-          {filteredItems.length === 0 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -186,7 +128,7 @@ export default function PortfolioSection() {
           )}
 
           {/* Load More Button */}
-          {filteredItems.length > 0 && (
+          {featuredUXProjects.length > 0 && (
             <motion.div 
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
