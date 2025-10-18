@@ -127,7 +127,7 @@ export default function PortfolioSection() {
             </motion.div>
           )}
 
-          {/* Load More Button */}
+          {/* More Projects Coming Soon */}
           {featuredUXProjects.length > 0 && (
             <motion.div 
               initial={{ opacity: 0 }}
@@ -136,14 +136,12 @@ export default function PortfolioSection() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="text-center mt-12 px-4"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="glass-morphism hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 text-sm sm:text-base w-full sm:w-auto max-w-xs sm:max-w-none"
-                data-testid="button-load-more"
+              <div
+                className="glass-morphism px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base inline-block text-slate-300"
+                data-testid="text-coming-soon"
               >
-                Load More Projects
-              </motion.button>
+                More Projects are coming soon
+              </div>
             </motion.div>
           )}
         </div>
