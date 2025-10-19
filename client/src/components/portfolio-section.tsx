@@ -1,10 +1,8 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { type Project } from "@shared/schema";
 import PortfolioCard from "./portfolio-card";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
-import { useFilter } from "@/hooks/use-filter";
 
 export default function PortfolioSection() {
   const { ref, isVisible } = useScrollAnimation();
@@ -12,24 +10,10 @@ export default function PortfolioSection() {
     queryKey: ["/api/projects"],
   });
 
-  const { activeFilter, setActiveFilter, filteredItems } = useFilter(
-    projects,
-    (project) => project.category
-  );
-
   // Separate featured UX projects (Skillry and Meet and Eat)
   const featuredUXProjects = projects.filter(project => 
-    (project.title === 'Skillry' || project.title === 'Meet and Eat') && 
-    (activeFilter === 'all' || project.category === activeFilter)
+    project.title === 'Skillry' || project.title === 'Meet and Eat'
   );
-
-  const filterButtons = [
-    { key: "all", label: "All Projects" },
-    { key: "ux", label: "UX Design" },
-    { key: "photography", label: "Photography" },
-    { key: "videography", label: "Videography" },
-    { key: "design", label: "Graphic Design" },
-  ];
 
   if (isLoading) {
     return (
@@ -59,32 +43,6 @@ export default function PortfolioSection() {
             My <span className="bg-gradient-primary bg-clip-text text-transparent">Portfolio</span>
           </motion.h2>
           
-          {/* Filter Buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15, margin: "0px 0px -20% 0px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 px-4"
-          >
-            {filterButtons.map((button) => (
-              <motion.button
-                key={button.key}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveFilter(button.key)}
-                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all duration-300 text-xs sm:text-sm lg:text-base ${
-                  activeFilter === button.key
-                    ? "bg-gradient-primary"
-                    : "glass-morphism hover:bg-white/20"
-                }`}
-                data-testid={`filter-button-${button.key}`}
-              >
-                {button.label}
-              </motion.button>
-            ))}
-          </motion.div>
-
           {/* Featured UX Projects Section */}
           {featuredUXProjects.length > 0 && (
             <motion.div

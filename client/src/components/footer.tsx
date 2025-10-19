@@ -1,12 +1,6 @@
 import { motion } from "framer-motion";
 
 export default function Footer() {
-  const footerLinks = [
-    { href: "#", label: "Privacy Policy" },
-    { href: "#", label: "Terms of Service" },
-    { href: "#", label: "Sitemap" },
-  ];
-
   return (
     <footer className="py-12 bg-deep-navy">
       <div className="container mx-auto px-6">
@@ -32,29 +26,10 @@ export default function Footer() {
             Creating compelling digital experiences through thoughtful design
           </motion.p>
           
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex justify-center space-x-6 mb-8"
-          >
-            {footerLinks.map((link, index) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                whileHover={{ scale: 1.05 }}
-                className="text-gray-400 hover:text-coral transition-colors duration-300"
-                data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                {link.label}
-              </motion.a>
-            ))}
-          </motion.div>
-          
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-gray-500 text-sm"
             data-testid="footer-copyright"
           >
