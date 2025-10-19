@@ -104,9 +104,9 @@ export default function PortfolioSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.1 * index }}
-                    className="transform hover:scale-105 transition-all duration-300"
+                    className="transform hover:scale-105 transition-all duration-300 h-full"
                   >
-                    <div className="glass-morphism rounded-2xl overflow-hidden shadow-2xl border border-white/20 hover:border-coral/30 transition-all duration-300">
+                    <div className="glass-morphism rounded-2xl overflow-hidden shadow-2xl border border-white/20 hover:border-coral/30 transition-all duration-300 h-full">
                       <PortfolioCard project={project} isFeatured={true} />
                     </div>
                   </motion.div>

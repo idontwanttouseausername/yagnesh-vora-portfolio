@@ -20,14 +20,14 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
   };
 
   return (
-    <Link href={`/project/${project.id}`} data-testid={`link-project-${project.id}`}>
+    <Link href={`/project/${project.id}`} className="h-full block" data-testid={`link-project-${project.id}`}>
       <motion.div
         whileHover={{ y: -10, scale: 1.02 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="project-card glass-morphism rounded-2xl overflow-hidden group cursor-pointer"
+        className="project-card glass-morphism rounded-2xl overflow-hidden group cursor-pointer h-full flex flex-col"
         data-testid={`project-card-${project.id}`}
       >
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden flex-shrink-0">
         <motion.img 
           src={project.imageUrl} 
           alt={project.title}
@@ -53,7 +53,7 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
       
-      <div className={`${isFeatured ? 'p-6 md:p-8' : 'p-3 sm:p-4 md:p-6'}`}>
+      <div className={`flex-1 flex flex-col ${isFeatured ? 'p-6 md:p-8 min-h-[200px]' : 'p-3 sm:p-4 md:p-6'}`}>
         <h3 className={`font-semibold mb-1 sm:mb-2 ${
           isFeatured 
             ? 'text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4' 
@@ -61,7 +61,7 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
         }`} data-testid={`project-title-${project.id}`}>
           {project.title}
         </h3>
-        <p className={`text-gray-400 mb-2 sm:mb-4 ${
+        <p className={`text-gray-400 mb-2 sm:mb-4 flex-1 ${
           isFeatured 
             ? 'text-base md:text-lg line-clamp-3 leading-relaxed' 
             : 'text-xs sm:text-sm md:text-base line-clamp-2'
@@ -83,7 +83,7 @@ export default function PortfolioCard({ project, isFeatured = false }: Portfolio
           </div>
         )}
         
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center mt-auto">
           <motion.div
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
