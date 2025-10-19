@@ -94,10 +94,10 @@ export default function PortfolioSection() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mb-16"
             >
-              <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-white">
+              <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-white">
                 Featured <span className="bg-gradient-primary bg-clip-text text-transparent">UX Projects</span>
               </h3>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 max-w-7xl mx-auto">
                 {featuredUXProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
