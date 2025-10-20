@@ -42,8 +42,7 @@ const seedProjects: InsertProject[] = [
       "/attached_assets/2_1756433766588.png",
       "/attached_assets/3_1756433766589.png",
       "/attached_assets/4_1756433766589.png",
-      "/attached_assets/5_1756433766589.png",
-      "/attached_assets/Meet and Eat_1756433869219.mov"
+      "/attached_assets/5_1756433766589.png"
     ],
     challenges: "[Placeholder for Challenges] - Describe the main challenges you faced while designing this app",
     solutions: "[Placeholder for Solutions] - Explain how you addressed the challenges and your design approach",
