@@ -1,6 +1,4 @@
 import { projects, messages, type Project, type InsertProject, type Message, type InsertMessage } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // Projects
@@ -16,42 +14,78 @@ export interface IStorage {
   getMessages(): Promise<Message[]>;
 }
 
-export class DatabaseStorage implements IStorage {
+export class MemStorage implements IStorage {
+  private projects: Map<string, Project>;
+  private messages: Map<string, Message>;
+  private currentId: number;
+
+  constructor() {
+    this.projects = new Map();
+    this.messages = new Map();
+    this.currentId = 1;
+  }
+
   async getProjects(): Promise<Project[]> {
-    return await db.select().from(projects);
+    return Array.from(this.projects.values());
   }
 
   async getProject(id: string): Promise<Project | undefined> {
-    const [project] = await db.select().from(projects).where(eq(projects.id, id));
-    return project || undefined;
+    return this.projects.get(id);
   }
 
   async getProjectsByCategory(category: string): Promise<Project[]> {
-    return await db.select().from(projects).where(eq(projects.category, category));
+    return Array.from(this.projects.values()).filter(p => p.category === category);
   }
 
   async getFeaturedProjects(): Promise<Project[]> {
-    return await db.select().from(projects).where(eq(projects.featured, "true"));
+    return Array.from(this.projects.values()).filter(p => p.featured === "true");
   }
 
   async createProject(project: InsertProject): Promise<Project> {
-    const [newProject] = await db.insert(projects).values(project).returning();
+    const id = (this.currentId++).toString();
+    const newProject: Project = { 
+      ...project, 
+      id, 
+      createdAt: new Date(),
+      tags: project.tags || null,
+      projectImages: project.projectImages || null,
+      technologies: project.technologies || null,
+      featured: project.featured || "false",
+      detailedDescription: project.detailedDescription || null,
+      challenges: project.challenges || null,
+      solutions: project.solutions || null,
+      outcomes: project.outcomes || null,
+      duration: project.duration || null,
+      role: project.role || null,
+      projectUrl: project.projectUrl || null
+    };
+    this.projects.set(id, newProject);
     return newProject;
   }
 
   async updateProject(id: string, updates: Partial<InsertProject>): Promise<Project | undefined> {
-    const [updatedProject] = await db.update(projects).set(updates).where(eq(projects.id, id)).returning();
-    return updatedProject || undefined;
+    const existing = this.projects.get(id);
+    if (!existing) return undefined;
+    const updated = { ...existing, ...updates };
+    this.projects.set(id, updated as Project);
+    return updated as Project;
   }
 
   async createMessage(message: InsertMessage): Promise<Message> {
-    const [newMessage] = await db.insert(messages).values(message).returning();
+    const id = (this.currentId++).toString();
+    const newMessage: Message = { 
+      ...message, 
+      id, 
+      createdAt: new Date(),
+      projectType: message.projectType || null
+    };
+    this.messages.set(id, newMessage);
     return newMessage;
   }
 
   async getMessages(): Promise<Message[]> {
-    return await db.select().from(messages);
+    return Array.from(this.messages.values());
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new MemStorage();
