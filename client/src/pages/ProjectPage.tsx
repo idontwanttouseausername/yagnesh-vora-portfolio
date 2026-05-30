@@ -211,6 +211,79 @@ export default function ProjectPage() {
                   </motion.div>
                 )}
 
+                {/* Journey Section - Meet and Eat only */}
+                {project.title === 'Meet and Eat' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.25 }}
+                    data-testid="project-journey"
+                  >
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Journey</h3>
+                    <p className="text-slate-400 mb-6 text-sm md:text-base">
+                      From early brainstorming to paper sketches — a look at how the idea took shape before any pixels were pushed.
+                    </p>
+
+                    {/* Ideation & Feedback */}
+                    <div className="mb-8">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">1</div>
+                        <h4 className="text-lg md:text-xl font-semibold text-white">Ideation & Feedback</h4>
+                      </div>
+                      <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
+                        <p className="text-slate-300 text-sm md:text-base mb-5 leading-relaxed">
+                          During our Apple Foundation Program sessions, we explored themes around food psychology and cultural connection. These notes capture the raw feedback and pivots from our ideation sessions — from questioning "Is it a dinner date?" to landing on the concept of <span className="text-amber-400 font-medium">"Demystify food perception"</span> and the guiding principle: <span className="text-emerald-400 italic">"Come try our food and know who we are."</span>
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="relative group">
+                            <img
+                              src="/attached_assets/Ideation Meet and Eat 1.jpeg"
+                              alt="Ideation notes - brainstorming session with feedback on food app concept"
+                              className="w-full rounded-lg shadow-lg border border-slate-700/50 transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent rounded-b-lg p-3">
+                              <p className="text-slate-200 text-xs md:text-sm font-medium">Brainstorming & Peer Feedback</p>
+                            </div>
+                          </div>
+                          <div className="relative group">
+                            <img
+                              src="/attached_assets/Ideation Meet and Eat 2.jpeg"
+                              alt="Ideation notes - food psychology and demystifying food perception"
+                              className="w-full rounded-lg shadow-lg border border-slate-700/50 transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent rounded-b-lg p-3">
+                              <p className="text-slate-200 text-xs md:text-sm font-medium">Food Psychology & Core Concept</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* User Flow Sketch */}
+                    <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">2</div>
+                        <h4 className="text-lg md:text-xl font-semibold text-white">User Flow Sketch</h4>
+                      </div>
+                      <div className="bg-slate-800/30 rounded-lg p-4 md:p-6">
+                        <p className="text-slate-300 text-sm md:text-base mb-5 leading-relaxed">
+                          Before jumping into Figma, I sketched out the core user flow on paper to validate the journey: from joining a huddle, selecting available dates, getting matched with other students, chatting about cuisines, to documenting the experience in a scrapbook.
+                        </p>
+                        <div className="relative group">
+                          <img
+                            src="/attached_assets/Sketch Meet and Eat.jpeg"
+                            alt="Hand-drawn wireframe sketches showing the Meet and Eat user flow across 5 screens"
+                            className="w-full rounded-lg shadow-lg border border-slate-700/50 transition-transform duration-300 group-hover:scale-[1.02]"
+                          />
+                          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-900/90 to-transparent rounded-b-lg p-3 md:p-4">
+                            <p className="text-slate-200 text-xs md:text-sm font-medium">Paper wireframes — Home → Find a Huddle → Match → Chat → Scrapbook</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
                 {project.solutions && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
